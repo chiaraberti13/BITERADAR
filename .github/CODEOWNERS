@@ -1,0 +1,34 @@
+# Repository governance and automation
+/.github/CODEOWNERS @chiaraberti13
+/.github/security-exceptions.yml @chiaraberti13
+/.github/workflows/ @chiaraberti13
+/CHANGELOG.md @chiaraberti13
+
+# Dependency and build trust boundary
+/.npmrc @chiaraberti13
+/.nvmrc @chiaraberti13
+/package.json @chiaraberti13
+/package-lock.json @chiaraberti13
+/tsconfig.json @chiaraberti13
+/vite.config.ts @chiaraberti13
+/vitest.config.ts @chiaraberti13
+/eslint.config.js @chiaraberti13
+
+# Security policy and deployment hardening
+/.editorconfig @chiaraberti13
+/.prettierignore @chiaraberti13
+/.prettierrc.json @chiaraberti13
+/CONTRIBUTING.md @chiaraberti13
+/SECURITY.md @chiaraberti13
+/vercel.json @chiaraberti13
+
+# Core & Security: trust model, rule engine, hostile-content isolation
+/src/worker/ @chiaraberti13
+/src/lib/ @chiaraberti13
+/src/rules/ @chiaraberti13
+/src/report/ @chiaraberti13
+
+# Product & content: game scenarios and translations
+/src/content/ @chiaraberti13
+/src/i18n/ @chiaraberti13
+/docs/ROADMAP.md @chiaraberti13

@@ -1,0 +1,58 @@
+{
+  "name": "biteradar",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Client-side email-forensics analysis assistant and \"Spot the Phish\" learning game. Deterministic, bilingual (IT/EN), no upload, no backend.",
+  "license": "GPL-3.0-only",
+  "engines": {
+    "node": "^22.22.2 || ^24.15.0 || >=26.0.0"
+  },
+  "packageManager": "npm@11.19.0",
+  "scripts": {
+    "dev": "vite --port=3000 --host=127.0.0.1",
+    "dev:network": "vite --port=3000 --host=0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "verify": "npm run format:check && npm run typecheck && npm run lint && npm run test:coverage && npm run build"
+  },
+  "dependencies": {
+    "postal-mime": "^2.4.4",
+    "react": "^19.0.1",
+    "react-dom": "^19.0.1",
+    "zustand": "^5.0.15"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "1.56.1",
+    "@tailwindcss/vite": "^4.1.14",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.7",
+    "@types/node": "^24.6.3",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "@vitest/coverage-v8": "^5.0.4",
+    "dompurify": "^3.2.6",
+    "eslint": "^10.12.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.7",
+    "globals": "^17.12.0",
+    "jsdom": "^30.1.2",
+    "prettier": "3.9.10",
+    "tailwindcss": "^4.1.14",
+    "typescript": "~5.8.2",
+    "typescript-eslint": "^8.71.1",
+    "vite": "^8.3.3",
+    "vitest": "^5.0.4"
+  }
+}

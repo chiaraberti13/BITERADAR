@@ -1,0 +1,25 @@
+name: 💡 Feature or rule proposal
+description: Suggest a feature, an analysis rule or a game scenario.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / motivation
+      description: What gap or need does this address?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: |
+        For an analysis rule, describe evidence → interpretation → severity → limits → legitimate explanations.
+        For a game scenario, keep it fictitious (invented/parodic brands and people).
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources
+      description: RFC, IANA or vendor documentation backing the claim, if applicable.

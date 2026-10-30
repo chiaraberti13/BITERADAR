@@ -1,0 +1,41 @@
+@import 'tailwindcss';
+
+@theme {
+  /* BiteRadar visual system — the "radar" metaphor: a dark canvas with a luminous
+     cyan/gold accent that "locks on" the clues in an email. Outcome colors never carry
+     meaning on their own (always paired with an icon and a text label). */
+  --color-canvas: #0b1117;
+  --color-surface: #111827;
+  --color-surface-subtle: #18222d;
+  --color-ink-primary: #e6edf3;
+  --color-ink-secondary: #aab7c4;
+  --color-ink-muted: #8b949e;
+  --color-accent: #22d3ee;
+  --color-accent-strong: #0a7489;
+  --color-gold: #f2c94c;
+  --color-stroke: #223042;
+
+  /* Four outcomes — no green. */
+  --color-outcome-risk: #ff5f57; /* 🔴 strong risk */
+  --color-outcome-suspicious: #feba2e; /* 🟠 suspicious */
+  --color-outcome-neutral: #8b949e; /* ⚪ no obvious signal */
+  --color-outcome-unknown: #5b6474; /* ❔ insufficient data */
+
+  /* Trust badges. */
+  --color-verified: #28c840; /* ✔ verified by the trusted recipient */
+  --color-reported: #8790a6; /* ◌ reported, not verifiable */
+
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+}
+
+:root {
+  color-scheme: dark light;
+}
+
+body {
+  margin: 0;
+  background: var(--color-canvas);
+  color: var(--color-ink-primary);
+  font-family: var(--font-sans);
+}
