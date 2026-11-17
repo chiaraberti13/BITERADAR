@@ -137,3 +137,13 @@ Prima di aprire una pull request, verifica che:
 - [ ] accesso da tastiera, focus visibile, semantica, contrasto e layout responsive siano preservati;
 - [ ] `npm run typecheck`, `lint`, `format:check`, `test` e `build` siano verdi;
 - [ ] documentazione, changelog e roadmap descrivano il risultato reale.
+
+## Segnalazioni e verifica dei contributi
+
+Analisi locale delle evidenze nelle email e formazione sul phishing.
+
+Usa i [modelli di segnalazione](https://github.com/chiaraberti13/BITERADAR/issues/new/choose) per bug, miglioramenti e barriere di accessibilità. Prima di aprire una nuova segnalazione verifica se ne esiste già una equivalente. Contesto utile: Browser, formato .eml o .msg, regola e messaggio sintetico senza dati personali.
+
+Per le modifiche, compila il modello di pull request e indica verifiche eseguite, esito e verifiche non eseguite con il motivo. Mantieni le istruzioni specifiche di questo progetto e la parità delle lingue già disponibili. Non allegare dati di produzione, credenziali o dati personali; usa esempi sintetici.
+
+Consulta [il codice di condotta](CODE_OF_CONDUCT.md), [la policy di sicurezza](SECURITY.md) e [le indicazioni di accessibilità](ACCESSIBILITY.md). Le vulnerabilità seguono esclusivamente il percorso descritto nella policy di sicurezza.

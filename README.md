@@ -101,3 +101,12 @@ redistribute the project while preserving the copyright and licence notice.
 ---
 
 © Chiara Berti — 2026
+
+## Comunità e collaborazione
+
+- [Come contribuire](CONTRIBUTING.md)
+- [Codice di condotta](CODE_OF_CONDUCT.md)
+- [Segnalazioni di sicurezza](SECURITY.md)
+- [Accessibilità e limiti delle verifiche](ACCESSIBILITY.md)
+- [Segnalare un problema o proporre un miglioramento](https://github.com/chiaraberti13/BITERADAR/issues/new/choose)
+- [Licenza del progetto](LICENSE)
