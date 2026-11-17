@@ -24,16 +24,16 @@
 
 It has two complementary halves:
 
-1. **Forensic analyzer.** Who the message claims to be from and where it really comes from; what **SPF, DKIM and DMARC** report, whether they are **aligned** and whether that header can be trusted at all; links extracted and rendered non-clickable ("defanged"); the clues found, each with its own *why* and its own *limits*; and, crucially, **what could not be checked**.
-2. **"Spot the Phish" game.** Realistic scenarios where the right answer may be *legitimate*, *phishing* or *"I can't tell — I'll verify through another channel"*, plus a **Daily Challenge** with a spoiler-free shareable result.
+1. **Forensic analyzer.** Who the message claims to be from and where it really comes from; what **SPF, DKIM and DMARC** report, whether they are **aligned** and whether that header can be trusted at all; links extracted and rendered non-clickable ("defanged"); the clues found, each with its own _why_ and its own _limits_; and, crucially, **what could not be checked**.
+2. **"Spot the Phish" game.** Realistic scenarios where the right answer may be _legitimate_, _phishing_ or _"I can't tell — I'll verify through another channel"_, plus a **Daily Challenge** with a spoiler-free shareable result.
 
 BiteRadar is honest about its limits by design: there is **no green light**. A clean analysis means "no obvious signals with the available data" — never "this email is safe".
 
 ## Features
 
-- **Trust model** — Only the `Authentication-Results` added by the *trusted recipient* count; everything below the trust boundary is marked *"reported, not verifiable"*. Conflicting authentication headers are flagged as a possible forgery. Based on [RFC 8601](https://www.rfc-editor.org/rfc/rfc8601) and [RFC 8617](https://www.rfc-editor.org/rfc/rfc8617) (ARC).
+- **Trust model** — Only the `Authentication-Results` added by the _trusted recipient_ count; everything below the trust boundary is marked _"reported, not verifiable"_. Conflicting authentication headers are flagged as a possible forgery. Based on [RFC 8601](https://www.rfc-editor.org/rfc/rfc8601) and [RFC 8617](https://www.rfc-editor.org/rfc/rfc8617) (ARC).
 - **Four outcomes + analysis coverage** — 🔴 strong risk signals · 🟠 suspicious, verify · ⚪ no obvious signals detected · ❔ insufficient data. Each outcome has an icon, a text label and a plain-language summary, so meaning never relies on colour alone. A coverage panel always states what was and was not analysed.
-- **Deterministic, versioned rule engine** — Each rule documents *evidence → interpretation → severity → evidence quality → limits → legitimate explanations*. Correlation groups prevent related signals from stacking; the score is never shown as a probability or percentage. Includes the **BEC rule** (corporate display name + free provider).
+- **Deterministic, versioned rule engine** — Each rule documents _evidence → interpretation → severity → evidence quality → limits → legitimate explanations_. Correlation groups prevent related signals from stacking; the score is never shown as a probability or percentage. Includes the **BEC rule** (corporate display name + free provider).
 - **Hostile-content isolation** — Text view by default; HTML, when opened, is sanitised and rendered inside an `<iframe sandbox="">` with its own strict CSP and no external resources; parsing runs in a **Web Worker** with resource limits.
 - **Privacy by design, enforced** — No upload, no persistence. The only network requests are listed in the privacy page and enforced by the app CSP (`connect-src`). Reports get a mandatory preview with automatic + manual redaction before export.
 - **Bilingual (IT/EN) and accessible** — WCAG 2.1 AA, full keyboard access, screen-reader announcements and `prefers-reduced-motion`.
@@ -42,18 +42,18 @@ See the full plan, trust model and rule catalogue in the [roadmap](docs/ROADMAP.
 
 ## Tech stack
 
-| Area       | Choice                                             |
-| ---------- | -------------------------------------------------- |
-| Language   | TypeScript                                         |
-| UI         | React 19                                           |
-| Build tool | Vite                                               |
-| Styling    | Tailwind CSS                                        |
-| State      | Zustand (in-memory; no email data is persisted)    |
-| `.eml`     | postal-mime                                        |
-| `.msg`     | @kenjiuno/msgreader (planned, v0.2)                |
-| Isolation  | Web Worker + `<iframe sandbox>` + DOMPurify        |
-| Tests      | Vitest + Playwright                                |
-| Hosting    | Vercel (static SPA)                                |
+| Area       | Choice                                          |
+| ---------- | ----------------------------------------------- |
+| Language   | TypeScript                                      |
+| UI         | React 19                                        |
+| Build tool | Vite                                            |
+| Styling    | Tailwind CSS                                    |
+| State      | Zustand (in-memory; no email data is persisted) |
+| `.eml`     | postal-mime                                     |
+| `.msg`     | @kenjiuno/msgreader (planned, v0.2)             |
+| Isolation  | Web Worker + `<iframe sandbox>` + DOMPurify     |
+| Tests      | Vitest + Playwright                             |
+| Hosting    | Vercel (static SPA)                             |
 
 ## Project structure
 
