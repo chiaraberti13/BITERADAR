@@ -29,6 +29,27 @@ It has two complementary halves:
 
 BiteRadar is honest about its limits by design: there is **no green light**. A clean analysis means "no obvious signals with the available data" — never "this email is safe".
 
+## 🗺️ Architecture Diagram
+
+```mermaid
+flowchart TD
+    accTitle: Architecture of BITERADAR
+    accDescr: The current browser app displays the bilingual interface. The dashed connection marks the planned integration with the email analyzer. The parser, scoring and report modules currently expose placeholder contracts.
+    app["React interface"] --> state["Language preference · Zustand"]
+    state --> labels["Italian and English strings"]
+    app -.-> parser["Planned email parser · Web Worker"]
+    parser -.-> trust["Recipient trust boundary"]
+    trust -.-> score["Rules and evidence scoring"]
+    score -.-> report["Redacted report preview"]
+
+    classDef core fill:#23313a,stroke:#7193a7,color:#f4f7f8;
+    classDef planned fill:#302a35,stroke:#b49abc,color:#f4f7f8,stroke-dasharray:5 3;
+    class app,state core;
+    class parser,trust,score,report planned;
+```
+
+The current browser app displays the bilingual interface. The dashed connection marks the planned integration with the email analyzer. The parser, scoring and report modules currently expose placeholder contracts.
+
 ## Features
 
 - **Trust model** — Only the `Authentication-Results` added by the _trusted recipient_ count; everything below the trust boundary is marked _"reported, not verifiable"_. Conflicting authentication headers are flagged as a possible forgery. Based on [RFC 8601](https://www.rfc-editor.org/rfc/rfc8601) and [RFC 8617](https://www.rfc-editor.org/rfc/rfc8617) (ARC).

@@ -29,6 +29,27 @@ Ha due anime complementari:
 
 BiteRadar è onesto sui propri limiti per costruzione: **non esiste un esito verde**. Un'analisi pulita significa "nessun segnale evidente con i dati disponibili", mai "questa email è sicura".
 
+## 🗺️ Diagramma dell’architettura
+
+```mermaid
+flowchart TD
+    accTitle: Architettura di BITERADAR
+    accDescr: Oggi l’app nel browser mostra l’interfaccia bilingue. La linea tratteggiata indica l’integrazione prevista con l’analizzatore di email. I moduli di parsing, valutazione ed esportazione definiscono per ora i tipi di dati e le interfacce.
+    app["Interfaccia React"] --> state["Preferenza di lingua · Zustand"]
+    state --> labels["Testi italiani e inglesi"]
+    app -.-> parser["Parser email previsto · Web Worker"]
+    parser -.-> trust["Confine di fiducia del destinatario"]
+    trust -.-> score["Regole e valutazione delle evidenze"]
+    score -.-> report["Anteprima del report con oscuramento dati"]
+
+    classDef core fill:#23313a,stroke:#7193a7,color:#f4f7f8;
+    classDef planned fill:#302a35,stroke:#b49abc,color:#f4f7f8,stroke-dasharray:5 3;
+    class app,state core;
+    class parser,trust,score,report planned;
+```
+
+Oggi l’app nel browser mostra l’interfaccia bilingue. La linea tratteggiata indica l’integrazione prevista con l’analizzatore di email. I moduli di parsing, valutazione ed esportazione definiscono per ora i tipi di dati e le interfacce.
+
 ## Funzionalità
 
 - **Modello di fiducia** — Contano solo gli `Authentication-Results` aggiunti dal _ricevente fidato_; tutto ciò che è sotto il confine di fiducia è marcato _"riportato, non verificabile"_. Header di autenticazione in conflitto vengono segnalati come possibile contraffazione. Basato su [RFC 8601](https://www.rfc-editor.org/rfc/rfc8601) e [RFC 8617](https://www.rfc-editor.org/rfc/rfc8617) (ARC).
