@@ -1,41 +1,436 @@
 @import 'tailwindcss';
-
-@theme {
-  /* BiteRadar visual system — the "radar" metaphor: a dark canvas with a luminous
-     cyan/gold accent that "locks on" the clues in an email. Outcome colors never carry
-     meaning on their own (always paired with an icon and a text label). */
-  --color-canvas: #0b1117;
-  --color-surface: #111827;
-  --color-surface-subtle: #18222d;
-  --color-ink-primary: #e6edf3;
-  --color-ink-secondary: #aab7c4;
-  --color-ink-muted: #8b949e;
-  --color-accent: #22d3ee;
-  --color-accent-strong: #0a7489;
-  --color-gold: #f2c94c;
-  --color-stroke: #223042;
-
-  /* Four outcomes — no green. */
-  --color-outcome-risk: #ff5f57; /* 🔴 strong risk */
-  --color-outcome-suspicious: #feba2e; /* 🟠 suspicious */
-  --color-outcome-neutral: #8b949e; /* ⚪ no obvious signal */
-  --color-outcome-unknown: #5b6474; /* ❔ insufficient data */
-
-  /* Trust badges. */
-  --color-verified: #28c840; /* ✔ verified by the trusted recipient */
-  --color-reported: #8790a6; /* ◌ reported, not verifiable */
-
-  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
-}
-
 :root {
-  color-scheme: dark light;
+  color-scheme: dark;
+  --bg: #10171d;
+  --panel: #19232b;
+  --ink: #f2f4f6;
+  --muted: #b6c5cf;
+  --line: #384852;
+  --accent: #85e2dc;
+  --deep: #123337;
+  --field: #111b22;
+  --gold: #efd09a;
+  font-family: Inter, system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
 }
-
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #eef3f3;
+  --panel: white;
+  --ink: #17282c;
+  --muted: #405966;
+  --line: #b7c9c9;
+  --accent: #006965;
+  --deep: #dbf1ef;
+  --field: #f6f9fa;
+  --gold: #714707;
+}
+* {
+  box-sizing: border-box;
+}
 body {
   margin: 0;
-  background: var(--color-canvas);
-  color: var(--color-ink-primary);
-  font-family: var(--font-sans);
+  min-width: 285px;
+}
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+button,
+select {
+  cursor: pointer;
+}
+button {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  padding: 0.55rem 0.9rem;
+  border-radius: 7px;
+  font-weight: 580;
+  color: var(--ink);
+}
+button:hover:not(:disabled),
+button[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: var(--deep);
+  color: var(--accent);
+}
+button:disabled {
+  cursor: default;
+  opacity: 0.65;
+}
+button.primary {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+button.primary:hover:not(:disabled) {
+  color: var(--accent);
+}
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+.mast {
+  border-bottom: 1px solid var(--line);
+  background: var(--field);
+}
+.bar,
+main,
+footer {
+  max-width: 1160px;
+  margin: auto;
+  padding-inline: clamp(16px, 4vw, 50px);
+}
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  min-height: 76px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  font-size: 1.55rem;
+  font-weight: 750;
+  letter-spacing: -0.055em;
+  text-decoration: none;
+  color: var(--ink);
+}
+.brand img {
+  margin-right: 0.55rem;
+}
+.brand span {
+  color: var(--accent);
+}
+.bar nav {
+  display: flex;
+  gap: 1.3rem;
+  align-self: stretch;
+  align-items: stretch;
+}
+.bar nav a {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid transparent;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 0.94rem;
+  white-space: nowrap;
+}
+.bar nav a[aria-current] {
+  border-color: var(--accent);
+  color: var(--ink);
+}
+.prefs {
+  margin-left: auto;
+  display: flex;
+  gap: 0.35rem;
+}
+.prefs button {
+  padding: 0.4rem 0.7rem;
+}
+.skip {
+  position: absolute;
+  left: 0.5rem;
+  top: -10rem;
+  z-index: 1;
+  background: var(--panel);
+  padding: 0.6rem;
+}
+.skip:focus {
+  top: 0.5rem;
+}
+main {
+  min-height: 74vh;
+  padding-bottom: 3rem;
+}
+.intro {
+  margin: clamp(28px, 5vw, 68px) 0 2rem;
+}
+.intro h1 {
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 690;
+  line-height: 1.04;
+  letter-spacing: -0.06em;
+  margin: 0 0 0.9rem;
+}
+.intro p,
+p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+.intro p {
+  font-size: 1.12rem;
+  max-width: 43rem;
+}
+.workspace,
+.game-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr);
+  gap: 1.2rem;
+  align-items: start;
+}
+.game-layout {
+  grid-template-columns: minmax(12rem, 0.8fr) minmax(0, 2fr);
+}
+.card,
+.verdict {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: clamp(18px, 3vw, 30px);
+  margin-bottom: 1rem;
+  min-width: 0;
+}
+.card h2,
+.verdict h2 {
+  font-size: 1.45rem;
+  font-weight: 650;
+  letter-spacing: -0.035em;
+  margin: 0 0 0.85rem;
+}
+.card h3 {
+  font-size: 1.12rem;
+  font-weight: 650;
+  margin: 1rem 0 0.65rem;
+}
+.card p {
+  margin: 0.6rem 0 1rem;
+}
+.tabs,
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.tabs {
+  margin: 0.8rem 0 1.2rem;
+}
+.tabs button {
+  font-size: 0.88rem;
+}
+.drop {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 0.45rem;
+  min-height: 190px;
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  background: var(--field);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.drop.over {
+  border-color: var(--accent);
+}
+.drop small,
+small,
+dt {
+  color: var(--muted);
+}
+.drop button {
+  margin: 0.5rem;
+}
+.mail-icon {
+  color: var(--accent);
+  font-size: 2.15rem;
+  line-height: 1.15;
+}
+.examples {
+  border-top: 3px solid var(--gold);
+}
+.examples button,
+.choice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  text-align: left;
+  margin-top: 0.55rem;
+  padding: 0.8rem 0.9rem;
+}
+.examples button span:last-child {
+  color: var(--gold);
+}
+.actions {
+  margin-top: 1rem;
+}
+label {
+  display: block;
+  margin: 0.7rem 0;
+  color: var(--ink);
+}
+textarea,
+input:not([type='checkbox']),
+select {
+  display: block;
+  width: 100%;
+  background: var(--field);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.7rem;
+  margin-top: 0.4rem;
+  color: var(--ink);
+}
+input[type='checkbox'] {
+  margin-right: 0.55rem;
+}
+textarea,
+code,
+pre,
+small {
+  font-family: ui-monospace, monospace;
+}
+textarea {
+  resize: vertical;
+}
+fieldset {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+}
+details {
+  border-top: 1px solid var(--line);
+  padding: 0.8rem 0;
+}
+summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+details:first-of-type {
+  margin-top: 1rem;
+}
+pre,
+code,
+dd,
+blockquote {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+pre,
+blockquote {
+  padding: 1rem;
+  background: var(--field);
+  border-radius: 6px;
+}
+dl > div {
+  display: flex;
+  gap: 1rem;
+  margin: 0.5rem 0;
+}
+dt {
+  min-width: 7rem;
+}
+.coverage {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.5rem;
+}
+.verdict {
+  border-left: 5px solid var(--muted);
+}
+.strong-risk {
+  border-left-color: #ed685e;
+}
+.suspicious {
+  border-left-color: #d6a14b;
+}
+iframe {
+  width: 100%;
+  min-height: 200px;
+  background: white;
+  margin-top: 0.7rem;
+}
+footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid var(--line);
+  padding-block: 1.3rem;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+.print-report {
+  display: none;
+}
+.game-card blockquote {
+  border-left: 3px solid var(--gold);
+  line-height: 1.7;
+}
+.score {
+  font-size: 2.4rem;
+}
+@media (max-width: 850px) {
+  .bar {
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding-top: 0.65rem;
+  }
+  .bar nav {
+    order: 3;
+    flex: 1 0 100%;
+    gap: 1rem;
+    overflow-x: auto;
+  }
+  .bar nav a {
+    padding-bottom: 0.6rem;
+  }
+  .workspace,
+  .game-layout {
+    grid-template-columns: 1fr;
+  }
+  .intro {
+    margin-top: 2rem;
+  }
+  .examples {
+    margin-top: 0;
+  }
+}
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  body * {
+    visibility: hidden;
+  }
+  body .print-report {
+    display: block;
+    visibility: visible;
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    color: black;
+    background: white;
+    white-space: pre-wrap;
+    font: 11pt/1.5 monospace;
+  }
+  .mast,
+  footer,
+  .intro,
+  .workspace,
+  .verdict,
+  .tabs,
+  .coverage,
+  .result > .card:not(:last-child) {
+    display: none;
+  }
+  .card,
+  main {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    min-height: 0;
+  }
 }

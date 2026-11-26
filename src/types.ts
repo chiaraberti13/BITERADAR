@@ -1,54 +1,25 @@
-/**
- * Shared type contracts for BiteRadar.
- *
- * Evidence-first data model (see docs/ROADMAP.md): the parser reports *facts*, the
- * trust model decides whether a fact is *verifiable*, the rules produce *derivations*,
- * and the outcome is a *motivated hypothesis* with declared coverage.
- */
-
 export type Language = 'it' | 'en';
-
 export type Theme = 'dark' | 'light';
-
-/** Localised string: every learner-facing text is bilingual. */
 export type Localized = Record<Language, string>;
-
-/** The four analysis outcomes. There is intentionally no "green"/"safe" outcome. */
-export type Outcome =
-  | 'strong-risk' // 🔴 at least one high-severity signal with trustworthy evidence
-  | 'suspicious' // 🟠 medium signals, or high signals on non-verifiable evidence
-  | 'no-signal' // ⚪ no significant signal and sufficient coverage
-  | 'insufficient-data'; // ❔ coverage below the minimum threshold
-
+export const bi = (it: string, en: string): Localized => ({ it, en });
+export type Outcome = 'strong-risk' | 'suspicious' | 'no-signal' | 'insufficient-data';
 export type Severity = 'high' | 'medium' | 'low';
-
-/** How much we can trust the evidence a signal is built on. */
 export type EvidenceQuality = 'verified' | 'reported';
-
-/**
- * A rule is data, not code (see src/rules). Each rule documents:
- * evidence → interpretation → severity → evidence quality → limits → legitimate explanations.
- */
 export interface Rule {
   id: string;
-  /** Engine rule version, independent from the app SemVer. */
   version: number;
-  /** Related signals in the same group do not stack; only the most severe counts. */
-  correlationGroup?: string;
+  correlationGroup: string;
   severity: Severity;
   evidence: Localized;
   interpretation: Localized;
   limits: Localized;
   legitimateExplanations: Record<Language, string[]>;
 }
-
-/** A rule that fired against a parsed message, with the evidence quality in context. */
 export interface Signal {
   rule: Rule;
   evidenceQuality: EvidenceQuality;
+  detail: string;
 }
-
-/** What the analysis could and could not look at. Always shown next to the outcome. */
 export interface Coverage {
   hasFullHeaders: boolean;
   recipientAuthResults: boolean;
@@ -57,23 +28,61 @@ export interface Coverage {
   attachmentsAnalyzed: boolean;
   dnsLookupPerformed: boolean;
 }
-
-/** Placeholder for the parsed message produced by the Web Worker (see src/worker). */
-export interface ParsedEmail {
-  headers: Record<string, string[]>;
-  from?: string;
-  returnPath?: string;
-  replyTo?: string;
-  textBody?: string;
-  htmlBody?: string;
-  links: string[];
+export interface Header {
+  key: string;
+  value: string;
 }
-
-/** The result of an analysis: a motivated hypothesis with declared coverage. */
+export interface Link {
+  target: string;
+  label: string;
+  host: string;
+  mismatch: boolean;
+}
+export interface AttachmentInfo {
+  name: string;
+  type: string;
+  signature: string;
+  size: number;
+  sha256: string;
+  flags: string[];
+}
+export interface ParsedEmail {
+  headers: Header[];
+  from: string;
+  fromDomain: string;
+  displayName: string;
+  subject: string;
+  replyTo: string;
+  returnPath: string;
+  sender: string;
+  textBody: string;
+  safeHtml: string;
+  links: Link[];
+  attachments: AttachmentInfo[];
+}
+export interface AuthMethod {
+  method: string;
+  result: string;
+  domain: string;
+}
+export interface AuthRecord {
+  service: string;
+  trusted: boolean;
+  methods: AuthMethod[];
+  raw: string;
+}
 export interface AnalysisResult {
   outcome: Outcome;
   signals: Signal[];
   coverage: Coverage;
-  /** Rule-engine version used, so a report stays reproducible. */
   engineVersion: string;
+  email: ParsedEmail;
+  auth: AuthRecord[];
+  boundary: string | null;
 }
+export const outcomes: Record<Outcome, Localized> = {
+  'strong-risk': bi('Segnali forti di rischio', 'Strong risk signals'),
+  suspicious: bi('Elementi sospetti da verificare', 'Suspicious elements to verify'),
+  'no-signal': bi('Nessun segnale evidente rilevato', 'No obvious signal detected'),
+  'insufficient-data': bi('Dati insufficienti', 'Insufficient data')
+};
