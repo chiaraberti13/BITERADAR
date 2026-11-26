@@ -4,7 +4,8 @@ import { analyze } from './scoring';
 import { examples } from '../content/examples';
 import { asMarkdown, reportText, asHtml } from '../report';
 import { dailyScenario, SCENARIOS } from '../content/dailyChallenge';
-import { ips, lookalike } from './indicators';
+import { ips } from './indicators';
+import { lookalike } from './lookalike';
 import { inspectFile } from '../worker/attachments';
 const trace = 'Received: from relay.example by mx.google.com; Wed, 4 Mar 2026 12:00:00 +0000';
 const auth = 'Authentication-Results: mx.google.com; ';
@@ -30,7 +31,7 @@ describe('labelled synthetic corpus', () => {
     ['duplicate From', message(pass, trace, from, from), 'insufficient-data'],
     ['missing trace', message(fail, from), 'insufficient-data'],
     ['contradiction', message(pass, trace, fail, from), 'suspicious', 'auth.conflict'],
-    ['unrelated DMARC', message(fail.replace('riva.example', 'other.example'), trace, from), 'no-signal'],
+    ['unrelated DMARC', message(fail.replace('riva.example', 'other.example'), trace, from), 'insufficient-data'],
     ['aligned SPF', message(auth + 'spf=pass smtp.mailfrom=sender@riva.example', trace, from), 'no-signal'],
     [
       'misaligned SPF',
@@ -110,7 +111,7 @@ it('redacts and quotes reports', async () => {
   );
   const text = reportText(r, 'it', { identity: true, trace: true, indicators: true });
   expect(text).not.toMatch(/learner@|192\.168|key=secret/);
-  expect(asMarkdown(text)).toMatch(/^    /);
+  expect(asMarkdown(text)).toMatch(/^ {4}/);
   expect(asHtml('<article>', 'it')).toContain('&lt;article&gt;');
 });
 it('limits input and rejects a truncated MSG', async () => {

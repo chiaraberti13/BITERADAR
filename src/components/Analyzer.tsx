@@ -1,9 +1,10 @@
-import { useRef, useState, useEffect } from 'react';
+import { lazy, useRef, useState, useEffect } from 'react';
 import { useStore } from '../store';
 import { examples } from '../content/examples';
 import type { Language } from '../types';
 import type { ParseResponse, ParseRequest } from '../worker/parser.worker';
-import { Results } from './Results';
+import { displayedFile } from '../worker/thunderbird';
+const Results = lazy(() => import('./Results').then((m) => ({ default: m.Results })));
 const max = 5 * 1024 * 1024;
 export function Analyzer({ lang }: { lang: Language }) {
   const t = (it: string, en: string) => (lang === 'it' ? it : en);
@@ -45,6 +46,24 @@ export function Analyzer({ lang }: { lang: Language }) {
     setFile(f.size <= max ? f : null);
     if (f.size > max) setStatus('error');
   }
+  useEffect(() => {
+    if (location.protocol !== 'moz-extension:') return;
+    let live = true;
+    displayedFile().then(
+      (f) => {
+        if (live) {
+          if (f.size <= max) setFile(f);
+          else setStatus('error');
+        }
+      },
+      () => {
+        if (live) setStatus('error');
+      }
+    );
+    return () => {
+      live = false;
+    };
+  }, []);
   async function run(source: string | File) {
     reset();
     const id = generation.current;

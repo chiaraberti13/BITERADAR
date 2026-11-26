@@ -1,0 +1,8 @@
+Authentication-Results: mx.google.com; dmarc=pass header.from=riva.example
+Received: from relay.example by mx.google.com; Wed, 4 Mar 2026 12:00:00 +0000
+From: Biblioteca Riva <prestiti@riva.example>
+To: learner@lab.example
+Subject: Ricevuta sintetica
+Content-Type: text/plain; charset=UTF-8
+
+Conferma del prestito sintetico.

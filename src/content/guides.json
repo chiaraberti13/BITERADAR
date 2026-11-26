@@ -1,0 +1,68 @@
+[
+  {
+    "slug": "headers",
+    "title": {
+      "it": "Come leggere gli header originali",
+      "en": "How to read original email headers"
+    },
+    "sections": [
+      {
+        "it": "In Gmail scegli Mostra originale dal menu del messaggio. In Outlook cerca Visualizza dettagli messaggio o Intestazioni Internet nelle proprietà. In Thunderbird scegli Visualizza sorgente. Incolla il blocco completo nell’analizzatore mantenendo l’ordine delle righe.",
+        "en": "Use Show original in Gmail, View message details or Internet headers in Outlook, or View source in Thunderbird. Paste the whole header block into the analyzer in its original order."
+      },
+      {
+        "it": "From indica chi si presenta come mittente. Reply-To indica dove arriverà una risposta. Nelle newsletter Return-Path può appartenere al distributore perché riceve gli errori di consegna. Confronta questi campi con il contesto prima di decidere.",
+        "en": "From identifies the claimed sender. Reply-To determines where a reply goes. A newsletter’s Return-Path may belong to the distributor that processes delivery errors. Interpret these fields in context before deciding."
+      },
+      {
+        "it": "Parti dai salti Received più vicini al tuo servizio. Gli header inseriti prima che la posta entrasse nel servizio possono essere inventati. Una schermata, un testo inoltrato o un singolo pass non ricostruiscono l’intera consegna.",
+        "en": "Start with the Received hops nearest your provider. Headers inserted before mail entered that service can be fabricated. A screenshot, a forwarded excerpt or one pass result cannot reconstruct the whole delivery."
+      }
+    ],
+    "source": "https://www.rfc-editor.org/rfc/rfc8601"
+  },
+  {
+    "slug": "authentication",
+    "title": {
+      "it": "SPF, DKIM, DMARC e allineamento",
+      "en": "SPF, DKIM, DMARC and alignment"
+    },
+    "sections": [
+      {
+        "it": "SPF (Sender Policy Framework) confronta il server di invio con le autorizzazioni del dominio di trasporto. DKIM (DomainKeys Identified Mail) verifica una firma che copre parti del messaggio. BiteRadar mostra cosa ha riportato il ricevente per ciascun controllo.",
+        "en": "SPF (Sender Policy Framework) checks the sending server against the transport domain’s policy. DKIM (DomainKeys Identified Mail) verifies a signature covering parts of a message. BiteRadar shows what the receiver reported for each check."
+      },
+      {
+        "it": "DMARC confronta il dominio From visibile con le identità che hanno superato SPF o DKIM. Se una delle due è allineata, DMARC può passare anche quando l’altra fallisce. Perciò leggi il dominio accanto al risultato.",
+        "en": "DMARC compares the visible From domain with identities that passed SPF or DKIM. One aligned successful mechanism can satisfy DMARC even when the other fails. Read the domain alongside the result."
+      },
+      {
+        "it": "Una mailing list può modificare il corpo e interrompere una firma. Gli header ARC forniscono il contesto dei passaggi intermedi. Una consultazione DNS facoltativa riguarda la configurazione attuale, che potrebbe essere cambiata dalla data di consegna.",
+        "en": "A mailing list can modify the body and break a signature. ARC headers provide context about intermediate handling. An optional DNS lookup describes current configuration, which may have changed since delivery."
+      }
+    ],
+    "source": "https://www.rfc-editor.org/rfc/rfc7489"
+  },
+  {
+    "slug": "payments",
+    "title": {
+      "it": "Verificare un cambio di IBAN",
+      "en": "Verifying a bank account change"
+    },
+    "sections": [
+      {
+        "it": "Un messaggio inviato da una casella compromessa può avere SPF, DKIM e DMARC superati. Se ti chiede di cambiare le coordinate di un fornitore, annota la richiesta e recupera il contatto di riferimento dall’anagrafica aziendale.",
+        "en": "A message sent from a compromised account can pass SPF, DKIM and DMARC. If it requests a vendor bank change, note the request and retrieve a contact from your organization’s supplier records."
+      },
+      {
+        "it": "Telefona al numero registrato e verifica la pratica. Conserva il numero del ticket e applica la doppia approvazione prevista per le modifiche ai pagamenti. Un numero riportato nello stesso messaggio non offre una conferma indipendente.",
+        "en": "Call the number already on record and verify the case. Retain the ticket number and apply the second approval used for payment changes. A number supplied in the same message does not provide independent confirmation."
+      },
+      {
+        "it": "Nel report condividi soltanto le evidenze necessarie. Un IOC (indicatore di compromissione), come un dominio o un hash, acquista significato quando lo colleghi a un evento osservabile. Controlla l’anteprima per nomi e numeri di pratica.",
+        "en": "Share only necessary evidence in the report. An IOC (indicator of compromise), such as a domain or hash, becomes meaningful when connected to an observed event. Review the preview for names and case numbers."
+      }
+    ],
+    "source": "https://www.ic3.gov/CrimeInfo/BusinessEmailCompromise"
+  }
+]

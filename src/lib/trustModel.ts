@@ -15,12 +15,46 @@ function family(host: string) {
   if (/^(?:[a-z0-9-]+\.)+protection\.outlook\.com$/.test(host)) return 'outlook';
   return '';
 }
+// Delimiters inside comments or quoted values have no structural meaning.
+function bareResults(value: string) {
+  let out = '',
+    depth = 0,
+    quoted = false,
+    escaped = false;
+  for (const ch of value) {
+    if (escaped) {
+      escaped = false;
+      continue;
+    }
+    if ((quoted || depth) && ch === '\\') {
+      escaped = true;
+      continue;
+    }
+    if (!depth && ch === '"') {
+      quoted = !quoted;
+      out += ' ';
+      continue;
+    }
+    if (!quoted && ch === '(') {
+      depth++;
+      out += ' ';
+      continue;
+    }
+    if (!quoted && ch === ')') {
+      if (!depth) return '';
+      depth--;
+      continue;
+    }
+    if (!quoted && !depth) out += ch;
+  }
+  return depth || quoted || escaped ? '' : out;
+}
 function parseMethods(value: string): AuthMethod[] {
-  return value
+  return bareResults(value)
     .split(';')
     .slice(1)
     .flatMap((clause) => {
-      const cleaned = clause.replace(/\([^()]*\)/g, ' ').trim();
+      const cleaned = clause.trim();
       const match =
         /^(spf|dkim|dmarc|compauth)=(pass|fail|softfail|neutral|none|temperror|permerror|bestguesspass)\b/i.exec(
           cleaned

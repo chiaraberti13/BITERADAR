@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { useStore } from './store';
 import { uiMessages } from './i18n';
 import { Analyzer } from './components/Analyzer';
-import { Game } from './components/Game';
-import { Guide } from './components/Guide';
-import { Trainer } from './components/Trainer';
+const Game = lazy(() => import('./components/Game').then((m) => ({ default: m.Game })));
+const Guide = lazy(() => import('./components/Guide').then((m) => ({ default: m.Guide })));
+const Trainer = lazy(() => import('./components/Trainer').then((m) => ({ default: m.Trainer })));
 import type { Scenario } from './content/dailyChallenge';
 
 export default function App() {
@@ -71,15 +71,17 @@ export default function App() {
         </div>
       </header>
       <main id="content" tabIndex={-1}>
-        {current === 'analyzer' ? (
-          <Analyzer lang={lang} />
-        ) : current === 'game' ? (
-          <Game lang={lang} custom={custom} />
-        ) : current === 'trainer' ? (
-          <Trainer lang={lang} custom={custom} onSave={setCustom} />
-        ) : (
-          <Guide lang={lang} privacy={current === 'privacy'} />
-        )}
+        <Suspense fallback={<p role="status">{it ? 'Caricamento…' : 'Loading…'}</p>}>
+          {current === 'analyzer' ? (
+            <Analyzer lang={lang} />
+          ) : current === 'game' ? (
+            <Game lang={lang} custom={custom} />
+          ) : current === 'trainer' ? (
+            <Trainer lang={lang} custom={custom} onSave={setCustom} />
+          ) : (
+            <Guide lang={lang} privacy={current === 'privacy'} />
+          )}
+        </Suspense>
       </main>
       <footer>
         <span>BiteRadar · {it ? 'Laboratorio di analisi email' : 'Email analysis lab'}</span>

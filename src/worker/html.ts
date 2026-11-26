@@ -40,23 +40,26 @@ export function readContent(html: string, plain: string) {
     body = '',
     hidden = 0,
     depth = 0,
-    anchor: { href: string; text: string } | null = null;
+    anchor: { href: string; text: string; offset: number } | null = null;
   function add(target: string, label: string) {
     const url = web(target);
     if (!url) return;
     const key = target + '\n' + label;
-    if (seen.has(key)) return;
-    seen.add(key);
-    if (links.length >= 256) throw Error('links');
+
     const visible =
       web(label.trim()) ??
       (/^(?:[a-z0-9-]+\.)+[a-z]{2,}(?:[/?#]\S*)?$/i.test(label.trim()) ? web('https://' + label.trim()) : null);
+    const mismatch = !!visible && visible.hostname !== url.hostname;
+    if (seen.has(key)) return mismatch;
+    if (links.length >= 256) throw Error('links');
+    seen.add(key);
     links.push({
       target: url.href,
       label,
       host: url.hostname,
-      mismatch: !!visible && visible.hostname !== url.hostname
+      mismatch
     });
+    return mismatch;
   }
   if (html) {
     const parser = new Parser(
@@ -67,7 +70,7 @@ export function readContent(html: string, plain: string) {
             hidden++;
             return;
           }
-          if (tag === 'a') anchor = { href: attrs.href ?? '', text: '' };
+          if (tag === 'a') anchor = { href: attrs.href ?? '', text: '', offset: safeHtml.length };
           if (allowed.has(tag)) {
             safeHtml += '<' + tag + '>';
             if (['p', 'br', 'li', 'div', 'tr'].includes(tag)) body += '\n';
@@ -87,7 +90,8 @@ export function readContent(html: string, plain: string) {
             return;
           }
           if (tag === 'a' && anchor) {
-            add(anchor.href, anchor.text.slice(0, 4096));
+            if (add(anchor.href, anchor.text.slice(0, 4096)))
+              safeHtml = safeHtml.slice(0, anchor.offset) + '<mark>' + safeHtml.slice(anchor.offset) + '</mark>';
             anchor = null;
           }
           if (allowed.has(tag) && tag !== 'br') safeHtml += '</' + tag + '>';

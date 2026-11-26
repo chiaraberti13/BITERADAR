@@ -3,7 +3,7 @@
 <p align="center"><a href="README.md">🇬🇧 English</a> · <a href="README.it.md">🇮🇹 Italiano</a></p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/status-in%20design-F2C94C?style=flat-square" alt="In progettazione">
+  <img src="https://img.shields.io/badge/status-release%20candidate-F2C94C?style=flat-square" alt="In progettazione">
   <img src="https://img.shields.io/badge/category-CYBERSECURITY-22D3EE?style=flat-square" alt="Cybersecurity">
   <img src="https://img.shields.io/badge/stack-React%20%2B%20TypeScript-8B949E?style=flat-square" alt="React e TypeScript">
   <img src="https://img.shields.io/badge/privacy-100%25%20client--side-2EA043?style=flat-square" alt="Solo lato client">
@@ -33,22 +33,14 @@ BiteRadar è onesto sui propri limiti per costruzione: **non esiste un esito ver
 
 ```mermaid
 flowchart TD
-    accTitle: Architettura di BITERADAR
-    accDescr: Oggi l’app nel browser mostra l’interfaccia bilingue. La linea tratteggiata indica l’integrazione prevista con l’analizzatore di email. I moduli di parsing, valutazione ed esportazione definiscono per ora i tipi di dati e le interfacce.
-    app["Interfaccia React"] --> state["Preferenza di lingua · Zustand"]
-    state --> labels["Testi italiani e inglesi"]
-    app -.-> parser["Parser email previsto · Web Worker"]
-    parser -.-> trust["Confine di fiducia del destinatario"]
-    trust -.-> score["Regole e valutazione delle evidenze"]
-    score -.-> report["Anteprima del report con oscuramento dati"]
-
-    classDef core fill:#23313a,stroke:#7193a7,color:#f4f7f8;
-    classDef planned fill:#302a35,stroke:#b49abc,color:#f4f7f8,stroke-dasharray:5 3;
-    class app,state core;
-    class parser,trust,score,report planned;
+    app["Interfaccia bilingue"] --> worker["Worker EML e MSG"]
+    worker --> trust["Confine di fiducia e regole"]
+    trust --> result["Esito ed evidenze"]
+    result --> report["Anteprima ed esportazione"]
+    app --> game["Gioco, sfida UTC e campagne"]
 ```
 
-Oggi l’app nel browser mostra l’interfaccia bilingue. La linea tratteggiata indica l’integrazione prevista con l’analizzatore di email. I moduli di parsing, valutazione ed esportazione definiscono per ora i tipi di dati e le interfacce.
+![BiteRadar Analyzer](assets/analyzer.png)
 
 ## Funzionalità
 
@@ -71,7 +63,7 @@ Il piano completo, il modello di fiducia e il catalogo delle regole sono nella [
 | Stile      | Tailwind CSS                                             |
 | Stato      | Zustand (in memoria; nessun dato email reso persistente) |
 | `.eml`     | postal-mime                                              |
-| `.msg`     | @kenjiuno/msgreader (previsto, v0.2)                     |
+| `.msg`     | CFB/MAPI locale                                          |
 | Isolamento | Web Worker + `<iframe sandbox>` + DOMPurify              |
 | Test       | Vitest + Playwright                                      |
 | Hosting    | Vercel (SPA statica)                                     |
@@ -108,7 +100,7 @@ npm run typecheck # controllo dei tipi TypeScript
 npm run lint      # ESLint
 ```
 
-> **Stato:** questo repository è in fase di scaffolding/progettazione. L'albero `src/` è uno scheletro che rispecchia l'architettura prevista; l'analizzatore e il gioco vengono costruiti seguendo la [roadmap](docs/ROADMAP.md).
+**Versione candidata.** Sono disponibili analisi locale, report Markdown/HTML e stampa PDF, 24 scenari, sfida UTC, modalità offline e laboratorio formatori. Il pacchetto Thunderbird si genera con `npm run package:thunderbird`. La validazione con utenti e il deploy di produzione sono tracciati nella [roadmap](docs/ROADMAP.md).
 
 ## Etica e uso consapevole
 
@@ -131,3 +123,7 @@ studiato, modificato e ridistribuito mantenendo l'avviso di copyright e licenza.
 - [Accessibilità e limiti delle verifiche](ACCESSIBILITY.md)
 - [Segnalare un problema o proporre un miglioramento](https://github.com/chiaraberti13/BITERADAR/issues/new/choose)
 - [Licenza del progetto](LICENSE)
+
+## Verifica e materiali
+
+[Protocollo e limiti dei parser](docs/VALIDATION.md) · [Kit per scuole e PMI](public/awareness-kit.md)

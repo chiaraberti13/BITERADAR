@@ -3,6 +3,7 @@ import DOMPurify from 'dompurify';
 import { outcomes, type AnalysisResult, type Language } from '../types';
 import { defang, ips } from '../lib/indicators';
 import { lookupDomain } from '../lib/dns';
+import { Glossary } from './Glossary';
 import { Report } from './Report';
 
 export function Results({ result: r, lang }: { result: AnalysisResult; lang: Language }) {
@@ -76,6 +77,7 @@ export function Results({ result: r, lang }: { result: AnalysisResult; lang: Lan
             </li>
           ))}
         </ul>
+        <Glossary lang={lang} />
       </section>
       <nav className="tabs" aria-label={t('Dettagli dell’analisi', 'Analysis details')}>
         {tabs.map(([key, label]) => (
@@ -187,6 +189,7 @@ export function Results({ result: r, lang }: { result: AnalysisResult; lang: Lan
                     'td',
                     'th',
                     'blockquote',
+                    'mark',
                     'pre'
                   ],
                   ALLOWED_ATTR: []

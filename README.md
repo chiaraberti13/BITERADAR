@@ -3,7 +3,7 @@
 <p align="center"><a href="README.md">🇬🇧 English</a> · <a href="README.it.md">🇮🇹 Italiano</a></p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/status-in%20design-F2C94C?style=flat-square" alt="In design">
+  <img src="https://img.shields.io/badge/status-release%20candidate-F2C94C?style=flat-square" alt="Release candidate">
   <img src="https://img.shields.io/badge/category-CYBERSECURITY-22D3EE?style=flat-square" alt="Cybersecurity">
   <img src="https://img.shields.io/badge/stack-React%20%2B%20TypeScript-8B949E?style=flat-square" alt="React and TypeScript">
   <img src="https://img.shields.io/badge/privacy-100%25%20client--side-2EA043?style=flat-square" alt="Client-side only">
@@ -33,22 +33,14 @@ BiteRadar is honest about its limits by design: there is **no green light**. A c
 
 ```mermaid
 flowchart TD
-    accTitle: Architecture of BITERADAR
-    accDescr: The current browser app displays the bilingual interface. The dashed connection marks the planned integration with the email analyzer. The parser, scoring and report modules currently expose placeholder contracts.
-    app["React interface"] --> state["Language preference · Zustand"]
-    state --> labels["Italian and English strings"]
-    app -.-> parser["Planned email parser · Web Worker"]
-    parser -.-> trust["Recipient trust boundary"]
-    trust -.-> score["Rules and evidence scoring"]
-    score -.-> report["Redacted report preview"]
-
-    classDef core fill:#23313a,stroke:#7193a7,color:#f4f7f8;
-    classDef planned fill:#302a35,stroke:#b49abc,color:#f4f7f8,stroke-dasharray:5 3;
-    class app,state core;
-    class parser,trust,score,report planned;
+    app["Bilingual interface"] --> worker["EML and MSG worker"]
+    worker --> trust["Trust boundary and rules"]
+    trust --> result["Outcome and evidence"]
+    result --> report["Preview and export"]
+    app --> game["Game, UTC challenge and campaigns"]
 ```
 
-The current browser app displays the bilingual interface. The dashed connection marks the planned integration with the email analyzer. The parser, scoring and report modules currently expose placeholder contracts.
+![BiteRadar Analyzer](assets/analyzer.png)
 
 ## Features
 
@@ -71,7 +63,7 @@ See the full plan, trust model and rule catalogue in the [roadmap](docs/ROADMAP.
 | Styling    | Tailwind CSS                                    |
 | State      | Zustand (in-memory; no email data is persisted) |
 | `.eml`     | postal-mime                                     |
-| `.msg`     | @kenjiuno/msgreader (planned, v0.2)             |
+| `.msg`     | Local CFB/MAPI reader                           |
 | Isolation  | Web Worker + `<iframe sandbox>` + DOMPurify     |
 | Tests      | Vitest + Playwright                             |
 | Hosting    | Vercel (static SPA)                             |
@@ -108,7 +100,7 @@ npm run typecheck # TypeScript type-check
 npm run lint      # ESLint
 ```
 
-> **Status:** this repository is in the scaffolding/design phase. The `src/` tree is a skeleton that mirrors the planned architecture; the analyzer and the game are built out along the [roadmap](docs/ROADMAP.md).
+**Release candidate.** Local analysis, Markdown/HTML reports and print to PDF, 24 scenarios, the UTC challenge, offline mode and the trainer workshop are available. Build the Thunderbird package with `npm run package:thunderbird`. Production deployment and user validation are tracked in the [roadmap](docs/ROADMAP.md).
 
 ## Ethics & safe use
 
@@ -131,3 +123,7 @@ redistribute the project while preserving the copyright and licence notice.
 - [Accessibility and verification limits](ACCESSIBILITY.md)
 - [Report a problem or propose an improvement](https://github.com/chiaraberti13/BITERADAR/issues/new/choose)
 - [Project license](LICENSE)
+
+## Verification and materials
+
+[Protocol and parser limitations](docs/VALIDATION.md) · [Workshop kit](public/awareness-kit.md)

@@ -82,6 +82,9 @@ export function Trainer({
           <button onClick={() => download(new Blob([draft], { type: 'application/json' }), 'biteradar-scenarios.json')}>
             {it ? 'Esporta JSON' : 'Export JSON'}
           </button>
+          <a href="/awareness-kit.md" download>
+            {it ? 'Scarica kit awareness' : 'Download workshop kit'}
+          </a>
           <a href="#game">Spot the Phish →</a>
         </div>
         <p role="status">{feedback}</p>

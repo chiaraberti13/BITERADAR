@@ -1,10 +1,10 @@
 import { getDomain } from 'tldts';
 import { rules } from '../rules';
 import { domainOf, identifyTrustBoundary } from './trustModel';
-import { lookalike } from './indicators';
+import { lookalike } from './lookalike';
 import type { AnalysisResult, EvidenceQuality, ParsedEmail, Rule, Signal } from '../types';
 
-export const ENGINE_VERSION = '1.0.0';
+export const ENGINE_VERSION = '1.0.1';
 const weight = { low: 1, medium: 2, high: 3 };
 const org = (d: string) => getDomain(d, { allowPrivateDomains: true }) ?? d;
 export function analyze(email: ParsedEmail, receiver = ''): AnalysisResult {
@@ -71,13 +71,22 @@ export function analyze(email: ParsedEmail, receiver = ''): AnalysisResult {
   for (const a of email.attachments) if (a.flags.length) add(rules.file, a.name + ' · ' + a.flags.join(', '));
   const findings = [...signals.values()].sort((a, b) => weight[b.rule.severity] - weight[a.rule.severity]);
   const significant = findings.some((s) => s.rule.severity !== 'low');
+  const relevant = trust.records
+    .filter((r) => r.trusted)
+    .flatMap((r) => r.methods)
+    .filter(
+      (m) => m.domain && (m.method === 'dmarc' ? m.domain === email.fromDomain : ['spf', 'dkim'].includes(m.method))
+    );
+  const contradictory =
+    relevant.some((m) => m.method === 'dmarc' && m.result === 'pass') &&
+    relevant.some((m) => m.method === 'dmarc' && m.result === 'fail');
   const outcome = !full
     ? 'insufficient-data'
-    : findings.some((s) => s.rule.severity === 'high' && s.evidenceQuality === 'verified')
+    : !contradictory && findings.some((s) => s.rule.severity === 'high' && s.evidenceQuality === 'verified')
       ? 'strong-risk'
       : significant
         ? 'suspicious'
-        : !trust.hasRecipientAuthResults
+        : !relevant.length
           ? 'insufficient-data'
           : 'no-signal';
   return {

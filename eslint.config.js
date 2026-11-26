@@ -17,8 +17,7 @@ const unsafeFrontendSyntax = [
     message: 'Passing dangerouslySetInnerHTML through an object or spread is not allowed.'
   },
   {
-    selector:
-      "AssignmentExpression[left.type='MemberExpression'][left.property.name=/^(innerHTML|outerHTML|srcdoc)$/]",
+    selector: "AssignmentExpression[left.type='MemberExpression'][left.property.name=/^(innerHTML|outerHTML|srcdoc)$/]",
     message: 'Unsafe HTML assignment is not allowed; use textContent or React rendering.'
   },
   {
@@ -36,7 +35,7 @@ const unsafeFrontendSyntax = [
     message: 'Network access is deny-by-default; document a reviewed network-inventory exception before adding fetch.'
   },
   {
-    selector: "NewExpression[callee.name=/^(XMLHttpRequest|WebSocket|EventSource)$/]",
+    selector: 'NewExpression[callee.name=/^(XMLHttpRequest|WebSocket|EventSource)$/]',
     message: 'Network access is deny-by-default; document and review an exception first.'
   },
   {
@@ -51,7 +50,8 @@ const unsafeFrontendSyntax = [
 const restrictedPersistenceSyntax = [
   {
     selector: "Identifier[name='localStorage']",
-    message: 'localStorage is allowed only in src/store.ts for allowlisted UI preferences; email data is never persisted.'
+    message:
+      'localStorage is allowed only in src/store.ts for allowlisted UI preferences; email data is never persisted.'
   },
   {
     selector: 'Identifier[name=/^(sessionStorage|indexedDB)$/]',
@@ -66,6 +66,7 @@ const restrictedPersistenceSyntax = [
 export default tseslint.config(
   { ignores: ['dist', 'coverage', 'playwright-report', 'test-results'] },
   js.configs.recommended,
+  { files: ['scripts/**/*.mjs'], languageOptions: { globals: globals.node } },
   ...tseslint.configs.recommended,
   {
     files: ['src/**/*.{ts,tsx}'],

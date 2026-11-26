@@ -6,7 +6,15 @@ All notable changes to BiteRadar are documented in this file. The project follow
 
 Use this section only for changes already merged into `main` but not yet included in a tagged release.
 
-### Added
+## [1.0.0-rc.1] — 2026-11-26
+
+- Local EML and Outlook MSG parsing in a bounded worker, trust boundary, versioned rules, attachment metadata and opt-in DNS.
+- Redacted report preview and Markdown, HTML and print-to-PDF exports.
+- Bilingual practice, UTC challenge, 24 scenarios, trainer sets, pre/post campaign and score cards.
+- Offline application, six static learning pages, Thunderbird package and workshop kit.
+- Labelled synthetic corpus, browser privacy and accessibility checks and Lighthouse gate.
+
+### Repository foundations
 
 - Repository scaffolding and GitHub-facing governance aligned with the account template: bilingual `README.md` / `README.it.md` with the shared banner and badge row, `LICENSE` (GPL-3.0), `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, this changelog, `descrizione.md`, `.github` templates, and the baseline tooling configuration (`.editorconfig`, `.prettierrc.json`, `.nvmrc`, `.npmrc`, `.gitignore`, `tsconfig.json`, `vite.config.ts`, `vitest.config.ts`, `vercel.json`, `index.html`).
 - Scaffolding e governance GitHub-facing allineati al template dell'account: `README.md` / `README.it.md` bilingui con banner e riga di badge condivisi, `LICENSE` (GPL-3.0), `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, questo changelog, `descrizione.md`, i template `.github` e la configurazione di tooling di base (`.editorconfig`, `.prettierrc.json`, `.nvmrc`, `.npmrc`, `.gitignore`, `tsconfig.json`, `vite.config.ts`, `vitest.config.ts`, `vercel.json`, `index.html`).

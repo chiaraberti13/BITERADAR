@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+  "name": "BiteRadar · Analizza questa email",
+  "description": "Esamina localmente il messaggio aperto in Thunderbird.",
+  "version": "0.2.0",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "biteradar@extensions.example",
+      "strict_min_version": "128.0"
+    }
+  },
+  "permissions": ["messagesRead", "activeTab"],
+  "message_display_action": {
+    "default_title": "BiteRadar · Analizza questa email",
+    "default_popup": "index.html",
+    "default_icon": "icon-192.png"
+  },
+  "icons": {
+    "192": "icon-192.png"
+  },
+  "content_security_policy": "default-src 'self'; script-src 'self'; object-src 'none'; connect-src 'self' https://dns.google/resolve; img-src 'self' data: blob:; frame-src 'self'; base-uri 'none'; form-action 'none'"
+}

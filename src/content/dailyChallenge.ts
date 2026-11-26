@@ -103,8 +103,8 @@ const rows: [string, string, string, string, GameAnswer, string, string][] = [
     'The portal confirms the event and content.'
   ],
   [
-    'Pagamento doppio',
-    'Duplicate payment',
+    'Pratica di rimborso',
+    'Refund case',
     'Un avviso di rimborso chiede il PIN. Il registro dell’emittente e l’operatore confermano una falsa pratica.',
     'A refund notice asks for your PIN. The issuer’s register and operator confirm a fabricated case.',
     'phishing',
@@ -130,8 +130,8 @@ const rows: [string, string, string, string, GameAnswer, string, string][] = [
     'Forwarding can change the signed content.'
   ],
   [
-    'Casella compromessa',
-    'Compromised account',
+    'Messaggio del fornitore',
+    'Supplier message',
     'DMARC passa sul dominio del fornitore. Il suo reparto sicurezza conferma che questa richiesta di bonifico è partita da un account rubato.',
     'DMARC passes for the supplier. Its security team confirms this transfer request came from a stolen account.',
     'phishing',
@@ -157,8 +157,8 @@ const rows: [string, string, string, string, GameAnswer, string, string][] = [
     'Translation errors alone carry little weight.'
   ],
   [
-    'Dominio sosia',
-    'Lookalike domain',
+    'Accesso al portale',
+    'Portal access',
     'Il portale segnalato usa lettere somiglianti. Il titolare del servizio e il SOC confermano una copia non autorizzata.',
     'The advertised portal uses lookalike letters. The service owner and SOC confirm an unauthorized copy.',
     'phishing',
@@ -211,8 +211,8 @@ const rows: [string, string, string, string, GameAnswer, string, string][] = [
     'A tracking link can be legitimate.'
   ],
   [
-    'Consegna inventata',
-    'Fabricated delivery',
+    'Avviso di consegna',
+    'Delivery notice',
     'Una richiesta di sblocco spedizione usa un codice che il corriere conferma come parte di una campagna fraudolenta.',
     'A delivery-release request uses a code the courier confirms belongs to a fraudulent campaign.',
     'phishing',
