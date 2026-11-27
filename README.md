@@ -3,6 +3,7 @@
 <p align="center"><a href="README.md">🇬🇧 English</a> · <a href="README.it.md">🇮🇹 Italiano</a></p>
 
 <p align="center">
+  <img src="https://github.com/chiaraberti13/BITERADAR/actions/workflows/verify.yml/badge.svg" alt="CI">
   <img src="https://img.shields.io/badge/status-v1.0.0-22D3EE?style=flat-square" alt="Release candidate">
   <img src="https://img.shields.io/badge/category-CYBERSECURITY-22D3EE?style=flat-square" alt="Cybersecurity">
   <img src="https://img.shields.io/badge/stack-React%20%2B%20TypeScript-8B949E?style=flat-square" alt="React and TypeScript">
