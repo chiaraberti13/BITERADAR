@@ -1,7 +1,7 @@
 {
   "name": "biteradar",
   "private": true,
-  "version": "1.0.0-rc.1",
+  "version": "1.0.0",
   "type": "module",
   "description": "Client-side email-forensics analysis assistant and \"Spot the Phish\" learning game. Deterministic, bilingual (IT/EN), no upload, no backend.",
   "license": "GPL-3.0-only",

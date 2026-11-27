@@ -3,7 +3,7 @@
 <p align="center"><a href="README.md">🇬🇧 English</a> · <a href="README.it.md">🇮🇹 Italiano</a></p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/status-release%20candidate-F2C94C?style=flat-square" alt="Release candidate">
+  <img src="https://img.shields.io/badge/status-v1.0.0-22D3EE?style=flat-square" alt="Release candidate">
   <img src="https://img.shields.io/badge/category-CYBERSECURITY-22D3EE?style=flat-square" alt="Cybersecurity">
   <img src="https://img.shields.io/badge/stack-React%20%2B%20TypeScript-8B949E?style=flat-square" alt="React and TypeScript">
   <img src="https://img.shields.io/badge/privacy-100%25%20client--side-2EA043?style=flat-square" alt="Client-side only">

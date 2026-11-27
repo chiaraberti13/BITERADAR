@@ -6,6 +6,10 @@ All notable changes to BiteRadar are documented in this file. The project follow
 
 Use this section only for changes already merged into `main` but not yet included in a tagged release.
 
+## [1.0.0] — 2026-11-27
+
+- Stable release of the analyzer, game and trainer. Acceptance included 48 unit tests and 17 browser tests, including five simulated workflows.
+
 ## [1.0.0-rc.1] — 2026-11-26
 
 - Local EML and Outlook MSG parsing in a bounded worker, trust boundary, versioned rules, attachment metadata and opt-in DNS.
