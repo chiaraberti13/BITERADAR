@@ -33,13 +33,13 @@ L'utente incolla o trascina un'email grezza (`.eml`, `.msg` o i soli header) e o
 - **Esito a 4 livelli** (🔴 segnali forti · 🟠 sospetto · ⚪ nessun segnale evidente · ❔ dati insufficienti)
   con un **pannello di copertura** che dichiara cosa è stato analizzato e cosa no. Non esiste un esito verde:
   un'analisi pulita non significa mai "è sicura".
-- **Elenco delle evidenze**, ognuna con il proprio *perché*, i propri *limiti* e le possibili
-  *spiegazioni legittime* (inoltri, mailing list, newsletter…).
+- **Elenco delle evidenze**, ognuna con il proprio _perché_, i propri _limiti_ e le possibili
+  _spiegazioni legittime_ (inoltri, mailing list, newsletter…).
 
 ### 🎮 Gioco "Spot the Phish"
 
-Scenari realistici con **tre risposte**: legittima, phishing o *"non posso stabilirlo: verifico tramite
-un altro canale"* — spesso la risposta più corretta nella realtà. Include una **Sfida del giorno**,
+Scenari realistici con **tre risposte**: legittima, phishing o _"non posso stabilirlo: verifico tramite
+un altro canale"_ — spesso la risposta più corretta nella realtà. Include una **Sfida del giorno**,
 uguale per tutti e scelta in modo deterministico dalla data, con risultato condivisibile senza spoiler.
 
 ### 🔒 Privacy e sicurezza come funzionalità
@@ -55,22 +55,22 @@ uguale per tutti e scelta in modo deterministico dalla data, con risultato condi
 
 ### Stack tecnologico
 
-| Area          | Tecnologia         | Ruolo nel progetto                                               |
-| ------------- | ------------------ | ---------------------------------------------------------------- |
-| Linguaggio    | **TypeScript**     | Tipizzazione statica di dati e stato, meno errori a runtime      |
-| UI            | **React 19**       | Costruzione dell'interfaccia a componenti                        |
-| Build tool    | **Vite**           | Dev server rapido e bundling di produzione                       |
-| Stile         | **Tailwind CSS**   | Design system utility-first, look coerente e responsivo          |
-| Stato         | **Zustand**        | Store centralizzato in memoria (nessuna persistenza dei dati email) |
-| Parsing `.eml`| **postal-mime**    | Parsing MIME lato client                                         |
-| Isolamento    | **Web Worker + `<iframe sandbox>` + DOMPurify** | Trattare il contenuto ostile dell'email in sicurezza |
-| Test          | **Vitest + Playwright** | Test unitari della logica pura e smoke test end-to-end      |
+| Area           | Tecnologia                                      | Ruolo nel progetto                                                  |
+| -------------- | ----------------------------------------------- | ------------------------------------------------------------------- |
+| Linguaggio     | **TypeScript**                                  | Tipizzazione statica di dati e stato, meno errori a runtime         |
+| UI             | **React 19**                                    | Costruzione dell'interfaccia a componenti                           |
+| Build tool     | **Vite**                                        | Dev server rapido e bundling di produzione                          |
+| Stile          | **Tailwind CSS**                                | Design system utility-first, look coerente e responsivo             |
+| Stato          | **Zustand**                                     | Store centralizzato in memoria (nessuna persistenza dei dati email) |
+| Parsing `.eml` | **postal-mime**                                 | Parsing MIME lato client                                            |
+| Isolamento     | **Web Worker + `<iframe sandbox>` + DOMPurify** | Trattare il contenuto ostile dell'email in sicurezza                |
+| Test           | **Vitest + Playwright**                         | Test unitari della logica pura e smoke test end-to-end              |
 
 ### Architettura (DNA "evidence-first")
 
-Il progetto separa nettamente **osservato / enrichment / derivato / ipotesi**: il parser riporta *fatti*,
-il modello di fiducia stabilisce se un fatto è *verificabile*, le regole producono *derivazioni* e l'esito
-è un'*ipotesi motivata* con copertura dichiarata.
+Il progetto separa nettamente **osservato / enrichment / derivato / ipotesi**: il parser riporta _fatti_,
+il modello di fiducia stabilisce se un fatto è _verificabile_, le regole producono _derivazioni_ e l'esito
+è un'_ipotesi motivata_ con copertura dichiarata.
 
 - **`src/types.ts`** — i tipi condivisi: email parsata, header, risultati di autenticazione, regole, esiti.
 - **`src/lib/`** — la **logica pura e testata**: modello di fiducia, estrazione URL/IOC, motore di scoring.

@@ -25,6 +25,6 @@ export const it = {
   coverage: {
     title: 'Copertura dell’analisi'
   }
-} as const;
+};
 
 export type UiMessages = typeof it;

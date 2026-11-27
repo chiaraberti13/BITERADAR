@@ -24,16 +24,16 @@
 
 Ha due anime complementari:
 
-1. **Analizzatore forense.** Chi dichiara di aver inviato il messaggio e da dove arriva davvero; cosa riportano **SPF, DKIM e DMARC**, se sono **allineati** e se quell'header è attendibile; i link estratti e resi non cliccabili ("defanged"); gli indizi trovati, ciascuno con il proprio *perché* e i propri *limiti*; e, soprattutto, **cosa non è stato possibile controllare**.
-2. **Gioco "Spot the Phish".** Scenari realistici in cui la risposta può essere *legittima*, *phishing* o *"non posso stabilirlo: verifico tramite un altro canale"*, con una **Sfida del giorno** dal risultato condivisibile senza spoiler.
+1. **Analizzatore forense.** Chi dichiara di aver inviato il messaggio e da dove arriva davvero; cosa riportano **SPF, DKIM e DMARC**, se sono **allineati** e se quell'header è attendibile; i link estratti e resi non cliccabili ("defanged"); gli indizi trovati, ciascuno con il proprio _perché_ e i propri _limiti_; e, soprattutto, **cosa non è stato possibile controllare**.
+2. **Gioco "Spot the Phish".** Scenari realistici in cui la risposta può essere _legittima_, _phishing_ o _"non posso stabilirlo: verifico tramite un altro canale"_, con una **Sfida del giorno** dal risultato condivisibile senza spoiler.
 
 BiteRadar è onesto sui propri limiti per costruzione: **non esiste un esito verde**. Un'analisi pulita significa "nessun segnale evidente con i dati disponibili", mai "questa email è sicura".
 
 ## Funzionalità
 
-- **Modello di fiducia** — Contano solo gli `Authentication-Results` aggiunti dal *ricevente fidato*; tutto ciò che è sotto il confine di fiducia è marcato *"riportato, non verificabile"*. Header di autenticazione in conflitto vengono segnalati come possibile contraffazione. Basato su [RFC 8601](https://www.rfc-editor.org/rfc/rfc8601) e [RFC 8617](https://www.rfc-editor.org/rfc/rfc8617) (ARC).
+- **Modello di fiducia** — Contano solo gli `Authentication-Results` aggiunti dal _ricevente fidato_; tutto ciò che è sotto il confine di fiducia è marcato _"riportato, non verificabile"_. Header di autenticazione in conflitto vengono segnalati come possibile contraffazione. Basato su [RFC 8601](https://www.rfc-editor.org/rfc/rfc8601) e [RFC 8617](https://www.rfc-editor.org/rfc/rfc8617) (ARC).
 - **Quattro esiti + copertura dell'analisi** — 🔴 segnali forti di rischio · 🟠 elementi sospetti da verificare · ⚪ nessun segnale evidente rilevato · ❔ dati insufficienti. Ogni esito ha icona, etichetta testuale e frase di sintesi: il significato non dipende mai dal solo colore. Un pannello di copertura dichiara sempre cosa è stato analizzato e cosa no.
-- **Motore di regole deterministico e versionato** — Ogni regola documenta *evidenza → interpretazione → gravità → qualità dell'evidenza → limiti → spiegazioni legittime*. I gruppi di correlazione evitano che segnali correlati si sommino; il punteggio non è mai mostrato come probabilità o percentuale. Include la **regola BEC** (nome visualizzato aziendale + provider gratuito).
+- **Motore di regole deterministico e versionato** — Ogni regola documenta _evidenza → interpretazione → gravità → qualità dell'evidenza → limiti → spiegazioni legittime_. I gruppi di correlazione evitano che segnali correlati si sommino; il punteggio non è mai mostrato come probabilità o percentuale. Include la **regola BEC** (nome visualizzato aziendale + provider gratuito).
 - **Isolamento dei contenuti ostili** — Vista testuale di default; l'HTML, quando aperto, è sanificato e reso dentro un `<iframe sandbox="">` con CSP propria stringente e senza risorse esterne; il parsing gira in un **Web Worker** con limiti di risorse.
 - **Privacy by design, imposta tecnicamente** — Nessun upload, nessuna persistenza. Le uniche richieste di rete sono elencate nella pagina privacy e bloccate dalla CSP dell'app (`connect-src`). I report hanno anteprima obbligatoria con oscuramento automatico + manuale prima dell'esportazione.
 - **Bilingue (IT/EN) e accessibile** — WCAG 2.1 AA, accesso completo da tastiera, annunci per screen reader e `prefers-reduced-motion`.
@@ -42,18 +42,18 @@ Il piano completo, il modello di fiducia e il catalogo delle regole sono nella [
 
 ## Stack tecnologico
 
-| Area       | Scelta                                                     |
-| ---------- | ---------------------------------------------------------- |
-| Linguaggio | TypeScript                                                 |
-| UI         | React 19                                                   |
-| Build tool | Vite                                                       |
-| Stile      | Tailwind CSS                                                |
-| Stato      | Zustand (in memoria; nessun dato email reso persistente)   |
-| `.eml`     | postal-mime                                                |
-| `.msg`     | @kenjiuno/msgreader (previsto, v0.2)                       |
-| Isolamento | Web Worker + `<iframe sandbox>` + DOMPurify                |
-| Test       | Vitest + Playwright                                        |
-| Hosting    | Vercel (SPA statica)                                       |
+| Area       | Scelta                                                   |
+| ---------- | -------------------------------------------------------- |
+| Linguaggio | TypeScript                                               |
+| UI         | React 19                                                 |
+| Build tool | Vite                                                     |
+| Stile      | Tailwind CSS                                             |
+| Stato      | Zustand (in memoria; nessun dato email reso persistente) |
+| `.eml`     | postal-mime                                              |
+| `.msg`     | @kenjiuno/msgreader (previsto, v0.2)                     |
+| Isolamento | Web Worker + `<iframe sandbox>` + DOMPurify              |
+| Test       | Vitest + Playwright                                      |
+| Hosting    | Vercel (SPA statica)                                     |
 
 ## Struttura del progetto
 
