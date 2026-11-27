@@ -2,22 +2,7 @@ import { useState } from 'react';
 import { SCENARIOS, type Scenario } from '../content/dailyChallenge';
 import type { Language } from '../types';
 import { download } from '../report/download';
-function validScenario(s: unknown): s is Scenario {
-  if (!s || typeof s !== 'object') return false;
-  const row = s as Record<string, unknown>;
-  return (
-    typeof row.id === 'string' &&
-    row.id.length > 0 &&
-    row.id.length <= 64 &&
-    [1, 2, 3].includes(Number(row.level)) &&
-    typeof row.level === 'number' &&
-    ['legitimate', 'phishing', 'verify-elsewhere'].includes(String(row.answer)) &&
-    ['title', 'observed', 'whyItMatters', 'safeAction', 'whatYouCannotConclude'].every((k) => {
-      const v = row[k] as Record<string, unknown> | null;
-      return v && ['it', 'en'].every((l) => typeof v[l] === 'string' && v[l].length > 0 && v[l].length <= 4000);
-    })
-  );
-}
+import { collections, validSet } from '../content/collections';
 export function Trainer({
   lang,
   custom,
@@ -33,14 +18,7 @@ export function Trainer({
   function apply() {
     try {
       const data: unknown = JSON.parse(draft);
-      if (
-        !Array.isArray(data) ||
-        !data.length ||
-        data.length > 80 ||
-        !data.every(validScenario) ||
-        new Set(data.map((x) => x.id)).size !== data.length
-      )
-        throw Error();
+      if (!validSet(data)) throw Error();
       onSave(data);
       setFeedback(it ? 'Set pronto nel gioco.' : 'Set ready in the game.');
     } catch {
@@ -61,6 +39,21 @@ export function Trainer({
             : 'Prepare bilingual fictitious cases and play them in Trainer set mode.'}
         </p>
       </header>
+      <section className="card">
+        <h2>{it ? 'Raccolte di scenari' : 'Scenario library'}</h2>
+        {collections.map((set) => (
+          <button
+            key={set.title.en}
+            onClick={() => {
+              onSave(set.scenarios);
+              setDraft(JSON.stringify(set.scenarios, null, 2));
+              setFeedback(it ? 'Raccolta pronta nel gioco.' : 'Collection ready in the game.');
+            }}
+          >
+            {set.title[lang]} · {set.scenarios.length}
+          </button>
+        ))}
+      </section>
       <section className="card">
         <h2>{it ? 'Editor di scenari' : 'Scenario editor'}</h2>
         <label>

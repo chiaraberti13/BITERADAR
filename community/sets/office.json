@@ -1,0 +1,83 @@
+{
+  "title": {
+    "it": "Segreteria e fornitori",
+    "en": "Office and suppliers"
+  },
+  "scenarios": [
+    {
+      "id": "community-office-01",
+      "level": 1,
+      "title": {
+        "it": "Iscrizione al laboratorio",
+        "en": "Workshop registration"
+      },
+      "observed": {
+        "it": "La segreteria del Laboratorio Arco invia il riepilogo che avevi richiesto. La tua area personale riporta la stessa iscrizione e gli stessi orari.",
+        "en": "Arc Workshop sends the summary you requested. Your independently opened account shows the same registration and schedule."
+      },
+      "whyItMatters": {
+        "it": "I dati della pratica coincidono con un’operazione confermata fuori dalla posta.",
+        "en": "The details match a transaction independently confirmed outside email."
+      },
+      "whatYouCannotConclude": {
+        "it": "La corrispondenza riguarda soltanto questo riepilogo.",
+        "en": "The match applies only to this summary."
+      },
+      "safeAction": {
+        "it": "Consulta gli orari dal tuo account già verificato.",
+        "en": "Use your verified account to check the schedule."
+      },
+      "answer": "legitimate"
+    },
+    {
+      "id": "community-office-02",
+      "level": 2,
+      "title": {
+        "it": "Indirizzo per le fatture",
+        "en": "Invoice delivery address"
+      },
+      "observed": {
+        "it": "Un messaggio firmato chiede alla segreteria di inoltrare tutte le fatture a una nuova casella. Nessun referente ha confermato la modifica.",
+        "en": "A signed message asks the office to forward all invoices to a new mailbox. No known contact has confirmed the change."
+      },
+      "whyItMatters": {
+        "it": "L’autenticazione da sola non dimostra che la persona possa autorizzare questa modifica.",
+        "en": "Authentication alone does not establish authority to approve this change."
+      },
+      "whatYouCannotConclude": {
+        "it": "La casella potrebbe appartenere al fornitore oppure a un terzo.",
+        "en": "The mailbox might belong to the supplier or to a third party."
+      },
+      "safeAction": {
+        "it": "Verifica con il referente in anagrafica prima di modificare il destinatario.",
+        "en": "Confirm with the supplier contact on file before changing the recipient."
+      },
+      "answer": "verify-elsewhere"
+    },
+    {
+      "id": "community-office-03",
+      "level": 3,
+      "title": {
+        "it": "Rinnovo del registro",
+        "en": "Registry renewal"
+      },
+      "observed": {
+        "it": "Un avviso chiede un pagamento per rinnovare il registro del Circolo Vela. La tesoreria, chiamata al recapito già noto, conferma che non esiste un rinnovo e che la richiesta è fraudolenta.",
+        "en": "A notice requests payment to renew Sail Club’s registry. The treasury, reached at its saved number, confirms there is no renewal and the request is fraudulent."
+      },
+      "whyItMatters": {
+        "it": "La verifica indipendente si riferisce proprio al pagamento richiesto.",
+        "en": "Independent verification addresses this specific payment request."
+      },
+      "whatYouCannotConclude": {
+        "it": "Dal solo nome visualizzato non puoi attribuire il messaggio a una persona.",
+        "en": "The display name alone cannot attribute the message to an individual."
+      },
+      "safeAction": {
+        "it": "Segnala l’avviso alla tesoreria senza rispondere al mittente.",
+        "en": "Report the notice to the treasury without replying to the sender."
+      },
+      "answer": "phishing"
+    }
+  ]
+}

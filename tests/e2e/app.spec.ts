@@ -90,3 +90,13 @@ test('trainer applies a bilingual set and checks it through the game', async ({ 
   await page.getByRole('button', { name: 'Set del formatore' }).click();
   await expect(page.getByRole('heading', { name: 'Prestito rinnovato' })).toBeVisible();
 });
+
+test('selected collection is editable and playable', async ({ page }) => {
+  await page.goto('/#trainer');
+  await page.getByRole('button', { name: /Segreteria e fornitori/ }).click();
+  const rows = JSON.parse(await page.getByLabel('JSON').inputValue());
+  expect(rows).toHaveLength(3);
+  await page.getByRole('link', { name: 'Spot the Phish →' }).click();
+  await page.getByRole('button', { name: 'Set del formatore' }).click();
+  await expect(page.getByRole('heading', { name: rows[0].title.it })).toBeVisible();
+});

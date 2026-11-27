@@ -667,7 +667,7 @@ Le prove locali coprono le quattro classi di esito, i report, la modalità offli
 
 - [x] Editor di scenari per formatori; modalità campagna awareness con badge.
 - [~] PWA offline-first; estensione "analizza questa email".
-- [~] Libreria scenari community (revisionata); SEO programmatico; awareness kit.
+- [x] Libreria scenari community (revisionata); SEO programmatico; awareness kit.
 
 **Exit gate (continuo):** crescita misurabile; adozione del kit da parte di terzi.
 
@@ -710,3 +710,5 @@ Elenco dei ruoli che un prodotto completo richiede, con il cappello che li copre
 ---
 
 <p align="center"><sub>Documento di impostazione — base di sviluppo. Nomi, priorità e tempi sono ipotesi adattabili.</sub></p>
+
+**Aggiornamento del 27 novembre.** La raccolta bilingue _Segreteria e fornitori_ contiene tre casi selezionabili, modificabili ed esportabili dal laboratorio formatori. Il catalogo valida i campi e gli identificativi in CI. In Thunderbird ESR 153.8 il pacchetto è stato installato temporaneamente e il pulsante del messaggio ha aperto il popup su una ricevuta sintetica. La verifica dell’esito dentro il popup resta aperta.

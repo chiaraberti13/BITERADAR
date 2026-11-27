@@ -86,6 +86,44 @@ describe('labelled synthetic corpus', () => {
     ],
     ['empty body', message(trace, from), 'insufficient-data']
   ];
+  it('publishes labelled corpus metrics', async () => {
+    // These fixtures describe an authorized transaction or a benign mail system.
+    // Ambiguous/adversarial fixtures and translations are outside the benign denominator.
+    const legitimate = new Set([
+      'aligned SPF',
+      'aligned DKIM',
+      'another DKIM aligns',
+      'DMARC covers alignment',
+      'role on company domain',
+      'reply elsewhere',
+      'normal reply',
+      'urgent newsletter',
+      'internal hop',
+      'Outlook',
+      'folded',
+      'anchor same'
+    ]);
+    const outcomes = await Promise.all(
+      cases.map(async ([name, raw, expected]) => ({ name, expected, actual: (await run(raw)).outcome }))
+    );
+    const benign = outcomes.filter((r) => legitimate.has(r.name));
+    const red = benign.filter((r) => r.actual === 'strong-risk').length;
+    const insufficient = outcomes.filter((r) => r.expected === 'insufficient-data');
+    const matched = insufficient.filter((r) => r.actual === r.expected).length;
+    console.info(
+      'Corpus: strong-risk on legitimate ' +
+        red +
+        '/' +
+        benign.length +
+        '; expected insufficient ' +
+        matched +
+        '/' +
+        insufficient.length
+    );
+    expect(benign.length).toBe(legitimate.size);
+    expect(red / benign.length).toBeLessThanOrEqual(0.05);
+    expect(matched).toBe(insufficient.length);
+  });
   for (const [name, raw, outcome, rule] of cases)
     it(name, async () => {
       const result = await run(raw);
