@@ -100,3 +100,26 @@ test('selected collection is editable and playable', async ({ page }) => {
   await page.getByRole('button', { name: 'Set del formatore' }).click();
   await expect(page.getByRole('heading', { name: rows[0].title.it })).toBeVisible();
 });
+
+test('results, report and game expose accessible controls', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: /Conferma biblioteca/ }).click();
+  const verdict = page.getByRole('heading', { name: '○ Nessun segnale evidente rilevato' });
+  await expect(verdict).toBeVisible();
+  const check = async () =>
+    expect((await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze()).violations).toEqual(
+      []
+    );
+  await check();
+  const report = page.getByRole('button', { name: 'Report', exact: true });
+  await report.focus();
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('textbox', { name: 'Anteprima modificabile' })).toBeVisible();
+  await check();
+  await page.getByRole('link', { name: 'Spot the Phish', exact: true }).click();
+  const choice = page.getByRole('button', { name: 'Legittima', exact: true });
+  await choice.focus();
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('heading', { name: /Risposta motivata/ })).toBeVisible();
+  await check();
+});

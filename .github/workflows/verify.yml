@@ -20,6 +20,7 @@ jobs:
       - run: npm run verify
       - run: npm audit --audit-level=high
       - run: npx playwright install --with-deps chromium
+      - run: command -v pdftotext || (sudo apt-get update && sudo apt-get install -y poppler-utils)
       - run: npm run test:e2e
       - run: npm run test:lighthouse
       - run: python3 scripts/extension.py

@@ -21,3 +21,9 @@ Use [the bilingual workshop kit](../public/awareness-kit.md). Recruit at least f
 ## Community scenarios
 
 Submit fictitious, bilingual cases through a pull request. Use a unique ID, the three-way answer and the observation, explanation, limit and safe action fields used in the trainer editor. Review factual accuracy, invented identities, localization and spoiler-free feedback before adding a case to the curated collection. Leave personal mail and identifiable organizations out of contributions.
+
+## Report and Thunderbird acceptance, 2026-11-27
+
+Playwright imports a synthetic message, includes its identity fields and redacts a case identifier through the preview selection control. It compares the downloaded HTML document text and the text extracted by Poppler from Chromium’s printed PDF with the final preview, retaining the receipt identifier and excluding the recipient, manually redacted identifier and email body. Browser tests require the `pdftotext` binary (Ubuntu package `poppler-utils`).
+
+The unchanged build XPI was temporarily installed in a disposable Thunderbird ESR 153.8.0 profile. Opening `tests/corpus/receipt.eml`, selecting the message action and invoking analysis in the popup produced “Nessun segnale evidente rilevato”. The headless test used a QA-only window actor added to the disposable Thunderbird installation to operate and read the remote popup. The actor is outside the extension and distribution.
