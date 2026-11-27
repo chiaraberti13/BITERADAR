@@ -48,7 +48,7 @@ export function Results({ result: r, lang }: { result: AnalysisResult; lang: Lan
         );
   return (
     <section className="result" aria-label={t('Risultato', 'Result')}>
-      <div className={'verdict ' + r.outcome} role="status">
+      <div className={'verdict ' + r.outcome}>
         <h2>
           {{ 'strong-risk': '▲', suspicious: '◇', 'no-signal': '○', 'insufficient-data': '?' }[r.outcome]}{' '}
           {outcomes[r.outcome][lang]}

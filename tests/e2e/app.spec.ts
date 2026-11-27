@@ -123,3 +123,15 @@ test('results, report and game expose accessible controls', async ({ page }) => 
   await expect(page.getByRole('heading', { name: /Risposta motivata/ })).toBeVisible();
   await check();
 });
+
+test('outcome and coverage update the existing live region and clear with the analysis', async ({ page }) => {
+  await page.goto('/');
+  const status = page.getByRole('status');
+  await expect(status).toBeEmpty();
+  await page.getByRole('button', { name: 'Conferma biblioteca' }).click();
+  await expect(status).toHaveText(/Nessun segnale evidente rilevato.*From e Received presenti.*ricevente disponibile/);
+  await page.getByRole('button', { name: 'Estratto incompleto' }).click();
+  await expect(status).toHaveText(/Dati insufficienti.*From o Received mancanti.*ricevente non disponibile/);
+  await page.getByRole('button', { name: 'Cancella analisi' }).click();
+  await expect(status).toBeEmpty();
+});

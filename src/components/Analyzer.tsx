@@ -1,7 +1,7 @@
 import { lazy, useRef, useState, useEffect } from 'react';
 import { useStore } from '../store';
 import { examples } from '../content/examples';
-import type { Language } from '../types';
+import { outcomes, type Language } from '../types';
 import type { ParseResponse, ParseRequest } from '../worker/parser.worker';
 import { displayedFile } from '../worker/thunderbird';
 const Results = lazy(() => import('./Results').then((m) => ({ default: m.Results })));
@@ -103,6 +103,18 @@ export function Analyzer({ lang }: { lang: Language }) {
   }
   return (
     <>
+      <p className="sr-only" role="status" aria-atomic="true">
+        {result &&
+          [
+            outcomes[result.outcome][lang],
+            result.coverage.hasFullHeaders
+              ? t('From e Received presenti.', 'From and Received present.')
+              : t('From o Received mancanti.', 'From or Received missing.'),
+            result.coverage.recipientAuthResults
+              ? t('Autenticazione del ricevente disponibile.', 'Receiver authentication available.')
+              : t('Autenticazione del ricevente non disponibile.', 'Receiver authentication unavailable.')
+          ].join(' ')}
+      </p>
       <header className="intro">
         <h1>{t('Analizza un’email', 'Analyze an email')}</h1>
         <p>
