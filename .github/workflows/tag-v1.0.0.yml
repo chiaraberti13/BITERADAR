@@ -1,0 +1,15 @@
+name: Pubblica v1.0.0
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/tag-v1.0.0.yml']
+permissions:
+  contents: write
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Crea il tag sul commit stabile
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST repos/chiaraberti13/BITERADAR/git/refs -f ref=refs/tags/v1.0.0 -f sha=0146a7fb12bca978662d41c6b0f18fe5f73a073f
