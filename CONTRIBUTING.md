@@ -4,7 +4,7 @@ This repository is a bilingual React/TypeScript email-forensics analysis assista
 
 ## Before you start
 
-1. Read `README.md`, `SECURITY.md`, the [roadmap](docs/ROADMAP.md) and relevant architecture/design documentation.
+1. Read `README.md`, `SECURITY.md` and relevant architecture/design documentation.
 2. Search existing issues and keep each pull request focused.
 3. Use only owned or explicitly authorized targets, systems and datasets.
 4. **Never commit a real email, credentials, tokens, private keys, personal data or sensitive evidence.** The corpus is synthetic only.

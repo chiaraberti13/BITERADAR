@@ -1,6 +1,6 @@
 <p align="center"><img src="assets/banner.svg" alt="BiteRadar" width="100%"></p>
 
-<p align="center"><a href="README.md">🇬🇧 English</a> · <a href="README.it.md">🇮🇹 Italiano</a> · <a href="https://biteradar-h8xa.vercel.app/">Apri BiteRadar</a></p>
+<p align="center"><a href="README.md">🇬🇧 English</a> · <a href="README.it.md">🇮🇹 Italiano</a></p>
 
 <p align="center">
   <img src="https://github.com/chiaraberti13/BITERADAR/actions/workflows/verify.yml/badge.svg" alt="CI">
@@ -13,7 +13,7 @@
 
 > Capisci cosa un'email dimostra, cosa nasconde e cosa devi verificare — senza caricarla su un server.
 
-<p align="center"><a href="docs/ROADMAP.md"><strong>Roadmap</strong></a> · <a href="SECURITY.md">Sicurezza</a> · <a href="CONTRIBUTING.md">Come contribuire</a> · <a href="LICENSE">Licenza</a></p>
+<p align="center"><a href="https://biteradar-h8xa.vercel.app/"><strong>Demo live</strong></a> · <a href="SECURITY.md">Sicurezza</a> · <a href="CONTRIBUTING.md">Come contribuire</a> · <a href="LICENSE">Licenza</a></p>
 
 ---
 
@@ -51,8 +51,6 @@ flowchart TD
 - **Isolamento dei contenuti ostili** — Vista testuale di default; l'HTML, quando aperto, è sanificato e reso dentro un `<iframe sandbox="">` con CSP propria stringente e senza risorse esterne; il parsing gira in un **Web Worker** con limiti di risorse.
 - **Privacy by design, imposta tecnicamente** — Nessun upload, nessuna persistenza. Le uniche richieste di rete sono elencate nella pagina privacy e bloccate dalla CSP dell'app (`connect-src`). I report hanno anteprima obbligatoria con oscuramento automatico + manuale prima dell'esportazione.
 - **Bilingue (IT/EN) e accessibile** — WCAG 2.1 AA, accesso completo da tastiera, annunci per screen reader e `prefers-reduced-motion`.
-
-Il piano completo, il modello di fiducia e il catalogo delle regole sono nella [roadmap](docs/ROADMAP.md).
 
 ## Stack tecnologico
 
@@ -101,7 +99,7 @@ npm run typecheck # controllo dei tipi TypeScript
 npm run lint      # ESLint
 ```
 
-**Versione candidata.** Sono disponibili analisi locale, report Markdown/HTML e stampa PDF, 24 scenari, sfida UTC, modalità offline e laboratorio formatori. Il pacchetto Thunderbird si genera con `npm run package:thunderbird`. La validazione con utenti e il deploy di produzione sono tracciati nella [roadmap](docs/ROADMAP.md).
+**Versione candidata.** Sono disponibili analisi locale, report Markdown/HTML e stampa PDF, 24 scenari, sfida UTC, modalità offline e laboratorio formatori. Il pacchetto Thunderbird si genera con `npm run package:thunderbird`.
 
 ## Etica e uso consapevole
 

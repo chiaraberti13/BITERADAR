@@ -13,7 +13,7 @@
 
 > Understand what an email proves, what it hides and what you still need to check — without uploading it anywhere.
 
-<p align="center"><a href="docs/ROADMAP.md"><strong>Roadmap</strong></a> · <a href="SECURITY.md">Security</a> · <a href="CONTRIBUTING.md">Contributing</a> · <a href="LICENSE">Licence</a></p>
+<p align="center"><a href="https://biteradar-h8xa.vercel.app/"><strong>Live demo</strong></a> · <a href="SECURITY.md">Security</a> · <a href="CONTRIBUTING.md">Contributing</a> · <a href="LICENSE">Licence</a></p>
 
 ---
 
@@ -51,8 +51,6 @@ flowchart TD
 - **Hostile-content isolation** — Text view by default; HTML, when opened, is sanitised and rendered inside an `<iframe sandbox="">` with its own strict CSP and no external resources; parsing runs in a **Web Worker** with resource limits.
 - **Privacy by design, enforced** — No upload, no persistence. The only network requests are listed in the privacy page and enforced by the app CSP (`connect-src`). Reports get a mandatory preview with automatic + manual redaction before export.
 - **Bilingual (IT/EN) and accessible** — WCAG 2.1 AA, full keyboard access, screen-reader announcements and `prefers-reduced-motion`.
-
-See the full plan, trust model and rule catalogue in the [roadmap](docs/ROADMAP.md).
 
 ## Tech stack
 
@@ -101,7 +99,7 @@ npm run typecheck # TypeScript type-check
 npm run lint      # ESLint
 ```
 
-**Release candidate.** Local analysis, Markdown/HTML reports and print to PDF, 24 scenarios, the UTC challenge, offline mode and the trainer workshop are available. Build the Thunderbird package with `npm run package:thunderbird`. Production deployment and user validation are tracked in the [roadmap](docs/ROADMAP.md).
+**Release candidate.** Local analysis, Markdown/HTML reports and print to PDF, 24 scenarios, the UTC challenge, offline mode and the trainer workshop are available. Build the Thunderbird package with `npm run package:thunderbird`.
 
 ## Ethics & safe use
 
