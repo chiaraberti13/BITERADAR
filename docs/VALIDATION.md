@@ -27,3 +27,11 @@ Submit fictitious, bilingual cases through a pull request. Use a unique ID, the 
 Playwright imports a synthetic message, includes its identity fields and redacts a case identifier through the preview selection control. It compares the downloaded HTML document text and the text extracted by Poppler from Chromium’s printed PDF with the final preview, retaining the receipt identifier and excluding the recipient, manually redacted identifier and email body. Browser tests require the `pdftotext` binary (Ubuntu package `poppler-utils`).
 
 The unchanged build XPI was temporarily installed in a disposable Thunderbird ESR 153.8.0 profile. Opening `tests/corpus/receipt.eml`, selecting the message action and invoking analysis in the popup produced “Nessun segnale evidente rilevato”. The headless test used a QA-only window actor added to the disposable Thunderbird installation to operate and read the remote popup. The actor is outside the extension and distribution.
+
+## Ripetizione del collaudo del 27 novembre 2026
+
+Con Node 24.22.3 sono passati formattazione, controllo dei tipi, lint, build e 48 test unitari. La copertura V8 è stata del 92,06% per le istruzioni e dell’87,17% per i rami. L’audit npm ha riportato zero vulnerabilità. I 10 test end-to-end sono passati con Playwright 1.56.1 e Chromium Headless Shell 141.0.7390.37. Comprendono lavoro offline, redazione ed esportazione HTML/PDF, tastiera e scansioni axe. Lighthouse sulla build locale ha misurato 97/100 per le prestazioni mobili e 100/100 per l’accessibilità automatica. Anche la generazione e il controllo di integrità ZIP del pacchetto Thunderbird sono riusciti.
+
+Sul [sito di produzione](https://biteradar-h8xa.vercel.app/) sono stati aperti i cinque esempi italiani in sessioni browser separate. Conferma biblioteca e Newsletter hanno restituito “Nessun segnale evidente rilevato”, Mittente discordante “Segnali forti di rischio”, Richiesta amministrativa “Elementi sospetti da verificare” ed Estratto incompleto “Dati insufficienti”.
+
+La prova con lettore di schermo desktop resta aperta. Nell’ambiente locale la creazione del socket Unix per D-Bus è stata rifiutata, impedendo la verifica con Orca tramite AT-SPI. Per il test di comprensione con cinque volontari mancano ancora osservazioni individuali e punteggi prima e dopo il laboratorio.
