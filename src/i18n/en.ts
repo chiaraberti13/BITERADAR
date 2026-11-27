@@ -6,7 +6,6 @@ export const en: UiMessages = {
     tagline:
       'Understand what an email proves, what it hides and what you still need to check — without uploading it anywhere.',
     skipToContent: 'Skip to content',
-    scaffoldingNotice: 'Project in scaffolding phase — follow the roadmap.',
     footer: 'Analysis assistant · © 2026 Chiara Berti'
   },
   nav: {

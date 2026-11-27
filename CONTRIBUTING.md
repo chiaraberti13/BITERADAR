@@ -64,7 +64,7 @@ Before opening a pull request, confirm that:
 - [ ] privacy, isolation and "no green light" constraints are preserved;
 - [ ] keyboard access, visible focus, semantics, contrast and responsive layouts are preserved;
 - [ ] `npm run typecheck`, `lint`, `format:check`, `test` and `build` pass;
-- [ ] documentation, changelog and roadmap reflect the actual result.
+- [ ] documentation and changelog reflect the actual result.
 
 ## Reporting and contribution checks
 

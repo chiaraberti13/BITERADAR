@@ -6,7 +6,6 @@ export const it = {
   app: {
     tagline: 'Capisci cosa un’email dimostra, cosa nasconde e cosa devi verificare — senza caricarla su un server.',
     skipToContent: 'Vai al contenuto',
-    scaffoldingNotice: 'Progetto in fase di scaffolding — segui la roadmap.',
     footer: 'Assistente all’analisi · © 2026 Chiara Berti'
   },
   nav: {

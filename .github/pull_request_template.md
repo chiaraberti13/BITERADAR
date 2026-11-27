@@ -16,11 +16,11 @@
 - [ ] privacy, isolation and "no green light" constraints are preserved;
 - [ ] keyboard access, visible focus, semantics, contrast and responsive layouts are preserved;
 - [ ] `npm run typecheck`, `lint`, `format:check`, `test` and `build` pass;
-- [ ] documentation, `CHANGELOG.md` and the roadmap reflect the actual result.
+- [ ] documentation and `CHANGELOG.md` reflect the actual result.
 
 ## Common checks
 
-- [ ] Described the problem, solution and relevant issue or roadmap item.
+- [ ] Described the problem, solution and relevant issue.
 - [ ] Listed verification commands or steps, outcomes and omitted checks with reasons.
 - [ ] Considered security, privacy, accessibility and compatibility; explained non-applicable aspects.
 - [ ] Updated English documentation and both READMEs where affected.
