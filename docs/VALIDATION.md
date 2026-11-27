@@ -14,7 +14,7 @@ Maximum input is 5 MiB, worker lifetime 6 seconds, header bytes 128 KiB, top-lev
 
 No analytics. App, public guides and packaged assets may be requested from the hosting origin. Only those static files are precached. A user-initiated DNS query sends the sender domain or its DMARC label to Google's DNS resolver without cookies or referrer. No message or report enters network requests, URL state or persistent storage. Local preferences are limited to theme and language. The Thunderbird popup reads the single displayed message after the user opens the action. Build it with `npm run package:thunderbird`. The output is `build/biteradar-thunderbird.xpi`. Load the XPI with Thunderbird's add-on tools for client acceptance testing.
 
-## Acceptance with participants
+## Optional post-release study with participants
 
 Use [the bilingual workshop kit](../public/awareness-kit.md). Recruit at least five non-expert volunteers. With consent, record anonymous yes/no responses to three questions: What does the outcome mean? Does a neutral outcome establish authenticity? What would you do next? Record individual pre/post scores on unseen scenarios. Compute each proportion over participants who completed the task and retain counts alongside percentages. Publish measured results only after the session. Targets are 80% for each comprehension question and a measurable pre/post change. The automated suite cannot supply those observations.
 
@@ -35,3 +35,9 @@ Con Node 24.22.3 sono passati formattazione, controllo dei tipi, lint, build e 4
 Sul [sito di produzione](https://biteradar-h8xa.vercel.app/) sono stati aperti i cinque esempi italiani in sessioni browser separate. Conferma biblioteca e Newsletter hanno restituito “Nessun segnale evidente rilevato”, Mittente discordante “Segnali forti di rischio”, Richiesta amministrativa “Elementi sospetti da verificare” ed Estratto incompleto “Dati insufficienti”.
 
 La prova con lettore di schermo desktop resta aperta. Nell’ambiente locale la creazione del socket Unix per D-Bus è stata rifiutata, impedendo la verifica con Orca tramite AT-SPI. Per il test di comprensione con cinque volontari mancano ancora osservazioni individuali e punteggi prima e dopo il laboratorio.
+
+## Accettazione simulata della v1.0
+
+Il criterio concordato per questa release è tecnico. Eseguire `npm run test:e2e` dopo la build. In cinque contesti Chromium distinti, `simulation.spec.ts` apre i cinque esempi italiani, verifica l’esito atteso, l’avvertenza sull’autenticità e il passo successivo. Attiva i controlli con Invio, verifica l’esito nel report e raggiunge la risposta motivata del gioco. Gli snapshot ARIA verificano il testo esposto per esito, anteprima e feedback. La suite comprende anche scansioni axe e controllo della regione live.
+
+Il test della campagna usa nove casi distinti e una sequenza di risposte nota. I valori attesi sono 1/3 prima, 3/3 dopo e 4/9 complessivi. Sono valori di collaudo del conteggio. Non sono state raccolte risposte di partecipanti né registrazioni vocali da un lettore di schermo. La verifica con utenti e tecnologia assistiva resta nel protocollo per il follow-up sul campo.
