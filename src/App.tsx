@@ -11,11 +11,21 @@ export default function App() {
   const { language: lang, theme, setTheme, setLanguage } = useStore();
   const [route, setRoute] = useState(() => location.hash.slice(1) || 'analyzer');
   const [custom, setCustom] = useState<Scenario[]>([]);
+  const [menuOpen, setMenuOpen] = useState(false);
   useEffect(() => {
-    const onHash = () => setRoute(location.hash.slice(1) || 'analyzer');
+    const onHash = () => {
+      setRoute(location.hash.slice(1) || 'analyzer');
+      setMenuOpen(false);
+    };
     window.addEventListener('hashchange', onHash);
     return () => window.removeEventListener('hashchange', onHash);
   }, []);
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setMenuOpen(false);
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [menuOpen]);
   useEffect(() => {
     document.documentElement.lang = lang;
     document.documentElement.dataset.theme = theme;
@@ -43,13 +53,22 @@ export default function App() {
       </a>
       <header className="mast">
         <div className="bar">
-          <a className="brand" href="#analyzer">
+          <a className="brand" href="#analyzer" onClick={() => setMenuOpen(false)}>
             <img src="/favicon.svg" alt="" width="38" height="38" />
             Bite<span>Radar</span>
           </a>
-          <nav aria-label={it ? 'Navigazione principale' : 'Main navigation'}>
+          <nav
+            id="primary-nav"
+            className={'primary-nav' + (menuOpen ? ' open' : '')}
+            aria-label={it ? 'Navigazione principale' : 'Main navigation'}
+          >
             {routes.map(([r, label]) => (
-              <a key={r} href={'#' + r} aria-current={current === r ? 'page' : undefined}>
+              <a
+                key={r}
+                href={'#' + r}
+                aria-current={current === r ? 'page' : undefined}
+                onClick={() => setMenuOpen(false)}
+              >
                 {label}
               </a>
             ))}
@@ -68,6 +87,16 @@ export default function App() {
               {theme === 'dark' ? '☼' : '☾'}
             </button>
           </div>
+          <button
+            type="button"
+            className="menu-toggle"
+            aria-expanded={menuOpen}
+            aria-controls="primary-nav"
+            aria-label={menuOpen ? (it ? 'Chiudi il menu' : 'Close menu') : it ? 'Apri il menu' : 'Open menu'}
+            onClick={() => setMenuOpen((o) => !o)}
+          >
+            <span aria-hidden="true">{menuOpen ? '✕' : '☰'}</span>
+          </button>
         </div>
       </header>
       <main id="content" tabIndex={-1}>
