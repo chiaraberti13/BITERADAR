@@ -1,15 +1,18 @@
 @import 'tailwindcss';
 :root {
   color-scheme: dark;
-  --bg: #10171d;
-  --panel: #19232b;
-  --ink: #f2f4f6;
-  --muted: #b6c5cf;
-  --line: #384852;
-  --accent: #85e2dc;
-  --deep: #123337;
-  --field: #111b22;
-  --gold: #efd09a;
+  /* Brand-aligned "radar" palette: near-black canvas with a cyan accent and gold,
+     matching assets/banner.svg. Surfaces step up bg < field < panel for depth.
+     All text pairings verified against WCAG AA on their own surface. */
+  --bg: #0b1117;
+  --panel: #151f29;
+  --ink: #e9eef3;
+  --muted: #a6b3bf;
+  --line: #2a3a46;
+  --accent: #3bd8e4;
+  --deep: #103036;
+  --field: #0f1822;
+  --gold: #f1c761;
   font-family: Inter, system-ui, sans-serif;
   background: var(--bg);
   color: var(--ink);
@@ -29,9 +32,19 @@
 * {
   box-sizing: border-box;
 }
+html {
+  -webkit-text-size-adjust: 100%;
+}
 body {
   margin: 0;
   min-width: 285px;
+  overflow-wrap: break-word;
+}
+/* Nothing (images, SVG, embedded bodies) may force horizontal page scroll on a phone. */
+img,
+svg,
+iframe {
+  max-width: 100%;
 }
 a {
   color: var(--accent);
@@ -55,6 +68,7 @@ button {
   border-radius: 7px;
   font-weight: 580;
   color: var(--ink);
+  min-height: 40px;
 }
 button:hover:not(:disabled),
 button[aria-pressed='true'] {
@@ -79,8 +93,17 @@ button.primary:hover:not(:disabled) {
   outline-offset: 3px;
 }
 .mast {
+  position: sticky;
+  top: 0;
+  z-index: 20;
   border-bottom: 1px solid var(--line);
-  background: var(--field);
+  background: color-mix(in srgb, var(--field) 88%, transparent);
+  backdrop-filter: blur(8px);
+}
+@supports not (backdrop-filter: blur(8px)) {
+  .mast {
+    background: var(--field);
+  }
 }
 .bar,
 main,
@@ -141,7 +164,7 @@ footer {
   position: absolute;
   left: 0.5rem;
   top: -10rem;
-  z-index: 1;
+  z-index: 50;
   background: var(--panel);
   padding: 0.6rem;
 }
@@ -151,12 +174,13 @@ footer {
 main {
   min-height: 74vh;
   padding-bottom: 3rem;
+  scroll-margin-top: 5rem;
 }
 .intro {
   margin: clamp(28px, 5vw, 68px) 0 2rem;
 }
 .intro h1 {
-  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-size: clamp(1.95rem, 6vw, 4rem);
   font-weight: 690;
   line-height: 1.04;
   letter-spacing: -0.06em;
@@ -380,11 +404,13 @@ footer {
   .bar nav {
     order: 3;
     flex: 1 0 100%;
-    gap: 1rem;
-    overflow-x: auto;
+    gap: 0.4rem 1.1rem;
+    /* Wrap onto new lines instead of a blind horizontal scroll. */
+    flex-wrap: wrap;
   }
   .bar nav a {
-    padding-bottom: 0.6rem;
+    min-height: 44px;
+    padding-bottom: 0.4rem;
   }
   .workspace,
   .game-layout {
@@ -395,6 +421,42 @@ footer {
   }
   .examples {
     margin-top: 0;
+  }
+  /* Comfortable tap targets for every control on touch layouts. */
+  button {
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 560px) {
+  .bar {
+    gap: 0.6rem;
+    min-height: 0;
+    padding-block: 0.6rem;
+  }
+  .brand {
+    font-size: 1.35rem;
+  }
+  /* Sender fields: stack label above value instead of a cramped two-column row. */
+  dl > div {
+    flex-direction: column;
+    gap: 0.1rem;
+    margin: 0.65rem 0;
+  }
+  dt {
+    min-width: 0;
+  }
+  /* Full-width, evenly shared detail tabs — reachable without a blind swipe. */
+  .tabs button {
+    flex: 1 1 auto;
+  }
+  footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .score {
+    font-size: 2rem;
   }
 }
 @media print {
@@ -456,7 +518,8 @@ footer {
   z-index: 1;
   left: 0;
   top: 100%;
-  width: min(15rem, 50vw);
+  width: min(18rem, 86vw);
+  max-width: calc(100vw - 2rem);
   padding: 0.65rem;
   background: var(--field);
   border: 1px solid var(--line);
