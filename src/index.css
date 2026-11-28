@@ -1,33 +1,38 @@
 @import 'tailwindcss';
 :root {
   color-scheme: dark;
-  /* Brand-aligned "radar" palette: near-black canvas with a cyan accent and gold,
-     matching assets/banner.svg. Surfaces step up bg < field < panel for depth.
-     All text pairings verified against WCAG AA on their own surface. */
-  --bg: #0b1117;
-  --panel: #151f29;
-  --ink: #e9eef3;
-  --muted: #a6b3bf;
-  --line: #2a3a46;
-  --accent: #3bd8e4;
-  --deep: #103036;
-  --field: #0f1822;
-  --gold: #f1c761;
+  /* Identity built around the product's meaning, not a shared house style.
+     BiteRadar is a phishing-forensics assistant, so the palette reads as a calm
+     indigo "night radar scope" (trust, careful investigation): a cool azure is the
+     interactive "signal" the radar locks onto, while warm amber and red are held
+     back exclusively for caution and danger, and neutral grey means "no obvious
+     signal" — deliberately never a reassuring green. AA-verified on each surface. */
+  --bg: #0a0f1c;
+  --panel: #151d31;
+  --ink: #eef1f8;
+  --muted: #a6b1c9;
+  --line: #293450;
+  --accent: #86a0ff;
+  --deep: #1c2746;
+  --field: #0e1526;
+  --gold: #f2c35a;
   font-family: Inter, system-ui, sans-serif;
   background: var(--bg);
   color: var(--ink);
 }
 :root[data-theme='light'] {
   color-scheme: light;
-  --bg: #eef3f3;
-  --panel: white;
-  --ink: #17282c;
-  --muted: #405966;
-  --line: #b7c9c9;
-  --accent: #006965;
-  --deep: #dbf1ef;
-  --field: #f6f9fa;
-  --gold: #714707;
+  /* Light mode keeps the same meaning: a cool, trustworthy indigo on a soft
+     blue-grey paper, warm hues still reserved for status. */
+  --bg: #eef1f7;
+  --panel: #ffffff;
+  --ink: #19223a;
+  --muted: #4b5873;
+  --line: #cfd6e6;
+  --accent: #3b4fc9;
+  --deep: #e6e9fb;
+  --field: #f4f6fb;
+  --gold: #7a5411;
 }
 * {
   box-sizing: border-box;
@@ -271,7 +276,7 @@ dt {
   line-height: 1.15;
 }
 .examples {
-  border-top: 3px solid var(--gold);
+  border-top: 3px solid var(--accent);
 }
 .examples button,
 .choice {
@@ -284,7 +289,7 @@ dt {
   padding: 0.8rem 0.9rem;
 }
 .examples button span:last-child {
-  color: var(--gold);
+  color: var(--accent);
 }
 .actions {
   margin-top: 1rem;
@@ -389,7 +394,7 @@ footer {
   display: none;
 }
 .game-card blockquote {
-  border-left: 3px solid var(--gold);
+  border-left: 3px solid var(--accent);
   line-height: 1.7;
 }
 .score {
